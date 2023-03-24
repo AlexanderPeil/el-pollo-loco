@@ -2,14 +2,14 @@ class World {
     character = new Character();
     level = level1;
 
-    canvas;
+    canvas; // *1 We need this canvas in this class in the function draw() for clearRect 
     ctx;
     keyboard;
     camera_x = 0;
-
+                // *2
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d');
-        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d'); // *2 We get this canvas from the game.js with the params in the constructor
+        this.canvas = canvas; // *1 This canvas is the canvas variable above the constructor. 
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
@@ -22,7 +22,8 @@ class World {
 
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // *1 clearRect clears the canvas too draw the next image. 
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
 
         this.ctx.translate(this.camera_x, 0);
 
@@ -34,8 +35,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
-        requestAnimationFrame(function() {
-            self.draw();
+        requestAnimationFrame(function() { // The function will start async and draw will repeat as
+            self.draw();                // many fps as the vido card its quality is good.
         });
     }
 

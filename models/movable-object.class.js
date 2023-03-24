@@ -9,9 +9,9 @@ class MovableObject {
     speed = 0.15;
     otherDirection = false;
 
-
+    // loadImage('img/test.png);
     loadImage(path) {
-        this.img = new Image()
+        this.img = new Image(); // this.img = document.geteElementById('image) <img id="image" src>
         this.img.src = path;
     }
 
@@ -36,9 +36,9 @@ class MovableObject {
         this.currenImage++;
     }
 
-    moveRight() {
-        console.log('Moving right');
-    }
+    // moveRight() {
+    //     console.log('Moving right');
+    // }
 
 
     moveLeft() {
