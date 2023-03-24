@@ -15,7 +15,8 @@ class World {
         this.setWorld();
     }
 
-
+    // We "give" the variable world to the class character. So you can use 
+    // the variable keyboard in the class character
     setWorld() {
         this.character.world = this;
     }
@@ -47,6 +48,7 @@ class World {
         });
     }
 
+
     addToMap(mo) {
         if(mo.otherDirection) {
             this.ctx.save();
@@ -56,7 +58,7 @@ class World {
         }
 
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-
+        // To restore otherDirection (false)
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
             this.ctx.restore();

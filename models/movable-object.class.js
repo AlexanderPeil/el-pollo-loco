@@ -4,7 +4,7 @@ class MovableObject {
     img;
     height = 150;
     width = 100;
-    imageCache = {};
+    imageCache = {}; // A cache for all images
     currenImage = 0;
     speed = 0.15;
     otherDirection = false;
@@ -16,7 +16,7 @@ class MovableObject {
     }
 
     /**
-     * 
+     * Takes an array of image paths and loads them into a cache. It uses the forEach() method to iterate over each path in the array and creates a new Image object for each path.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
      */
     loadImages(arr) {
@@ -28,7 +28,8 @@ class MovableObject {
         });
     }
 
-
+    // plays an animation using a sequence of images. The function takes an array of image paths as input and cycles through the array to display each image in turn.
+    // The function uses the modulo operator (%) to calculate the index of the current image to display.
     playAnimation(images) {
         let i = this.currenImage % this.IMAGES_WALKING.length; // let i = 0 % 6 (0 / 6 = 0 Rest 6 usw bis 6 / 6 = 1 Rest 0)
         let path = images[i];
@@ -40,7 +41,8 @@ class MovableObject {
     //     console.log('Moving right');
     // }
 
-
+    // Animation to some objects like chickens or clouds. 
+    // It decreases x (-=) with the speed variable and it refreshes 60/sec = 60 fps.
     moveLeft() {
         setInterval( () => {
             this.x -= this.speed;
