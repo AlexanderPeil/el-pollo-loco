@@ -32,6 +32,23 @@ class MovableObject {
         this.img.src = path;
     }
 
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    };
+
+
+    drawFrame(ctx) {
+
+        if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    };
+
     /**
      * Takes an array of image paths and loads them into a cache. It uses the forEach() method to iterate over each path in the array and creates a new Image object for each path.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
@@ -61,7 +78,7 @@ class MovableObject {
     // Animation to some objects like chickens or clouds. 
     // It decreases x (-=) with the speed variable and it refreshes 60/sec = 60 fps.
     moveLeft() {
-            this.x -= this.speed;
+        this.x -= this.speed;
     }
 
     jump() {
