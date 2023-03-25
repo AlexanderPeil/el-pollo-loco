@@ -15,7 +15,7 @@ class Character extends MovableObject{
     walking_sound = new Audio('./audio/running.mp3');
 
 constructor() {
-    super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
+    super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
 
     this.animate();
@@ -24,7 +24,7 @@ constructor() {
 animate() {
 
     setInterval( () => {
-        this.walking_sound.pause();
+        this.walking_sound.pause(); // The sound will play only if you push the walk button else it won't play
         if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
             this.x += this.speed;
             this.otherDirection = false;
@@ -36,7 +36,7 @@ animate() {
             this.otherDirection = true;
             this.walking_sound.play();
         }
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + 100; // The character starts 100px right
     }, 1000/60);
 
 

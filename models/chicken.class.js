@@ -10,7 +10,7 @@ class Chicken extends MovableObject{
 
     constructor() {
         // super() is for the methods of the super-class
-        super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        super().loadImage(this.IMAGES_WALKING[0]);
         // And this we use to change variables of the super-class
         this.loadImages(this.IMAGES_WALKING);
                 // Math random is a random number between 0 - 1 (i.e. 0.17)

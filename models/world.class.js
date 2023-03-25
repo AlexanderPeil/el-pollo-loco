@@ -26,14 +26,15 @@ class World {
         // *1 clearRect clears the canvas too draw the next image. 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
 
-        this.ctx.translate(this.camera_x, 0);
-
+        this.ctx.translate(this.camera_x, 0);// Pushes draw the ctx to the left side
+        // Then we draw our elements in the ctx
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.bottles);
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0); // Finally we push the ctx back to the right
 
         let self = this;
         requestAnimationFrame(function() { // The function will start async and draw will repeat as
@@ -49,8 +50,15 @@ class World {
     }
 
 
+    /**
+     * Checks if otherDirection is true (when push button <- or A) so the character walks into the other direction.
+     *  First it saves the current state if the canvas (ctx.save()).
+     * Then it translates the canvas along the x-axis (ctx.translate) and scales it horizontally by x-axis (ctx.scale).
+     * Finally the method sets the x property of mo its negative value.
+     * @param {object} mo - A param for a movable object (like the character)
+     */
     addToMap(mo) {
-        if(mo.otherDirection) {
+        if(mo.otherDirection) { 
             this.ctx.save();
             this.ctx.translate(mo.width, 0);
             this.ctx.scale(-1, 1);
