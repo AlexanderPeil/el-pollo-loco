@@ -8,6 +8,23 @@ class MovableObject {
     currenImage = 0;
     speed = 0.15;
     otherDirection = false;
+    speedY = 0;
+    acceleration = 1;
+
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
+    }
+
+
+    isAboveGround() {
+        return this.y < 155;
+    }
 
     // loadImage('img/test.png);
     loadImage(path) {
@@ -37,15 +54,17 @@ class MovableObject {
         this.currenImage++;
     }
 
-    // moveRight() {
-    //     console.log('Moving right');
-    // }
+    moveRight() {
+        this.x += this.speed;
+    }
 
     // Animation to some objects like chickens or clouds. 
     // It decreases x (-=) with the speed variable and it refreshes 60/sec = 60 fps.
     moveLeft() {
-        setInterval( () => {
             this.x -= this.speed;
-        }, 1000 / 60);
+    }
+
+    jump() {
+        this.speedY = 20;
     }
 }

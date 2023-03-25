@@ -1,4 +1,4 @@
-class Character extends MovableObject{
+class Character extends MovableObject {
     height = 280;
     y = 155;
     speed = 10;
@@ -11,46 +11,69 @@ class Character extends MovableObject{
         './img/2_character_pepe/2_walk/W-26.png'
     ];
 
+    IMAGES_JUMPING = [
+        './img/2_character_pepe/3_jump/J-31.png',
+        './img/2_character_pepe/3_jump/J-32.png',
+        './img/2_character_pepe/3_jump/J-33.png',
+        './img/2_character_pepe/3_jump/J-34.png',
+        './img/2_character_pepe/3_jump/J-35.png',
+        './img/2_character_pepe/3_jump/J-36.png',
+        './img/2_character_pepe/3_jump/J-37.png',
+        './img/2_character_pepe/3_jump/J-38.png',
+        './img/2_character_pepe/3_jump/J-39.png'
+    ];
+
     world;
     walking_sound = new Audio('./audio/running.mp3');
 
-constructor() {
-    super().loadImage(this.IMAGES_WALKING[0]);
-    this.loadImages(this.IMAGES_WALKING);
+    constructor() {
+        super().loadImage(this.IMAGES_WALKING[0]);
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_JUMPING);
+        this.applyGravity();
+        this.animate();
+    }
 
-    this.animate();
-}
+    animate() {
 
-animate() {
+        setInterval(() => {
+            this.walking_sound.pause(); // The sound will play only if you push the walk button else it won't play
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
+                this.moveRight();
+                this.otherDirection = false;
+                this.walking_sound.play();
+            }
 
-    setInterval( () => {
-        this.walking_sound.pause(); // The sound will play only if you push the walk button else it won't play
-        if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
-            this.x += this.speed;
-            this.otherDirection = false;
-            this.walking_sound.play();
-        }
+            if (this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0) {
+                this.moveLeft(); 
+                this.otherDirection = true;
+                this.walking_sound.play();
+            }
 
-        if(this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0) {
-            this.x -= this.speed;
-            this.otherDirection = true;
-            this.walking_sound.play();
-        }
-        this.world.camera_x = -this.x + 100; // The character starts 100px right
-    }, 1000/60);
+            if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
+            }
+
+            this.world.camera_x = -this.x + 100; // The character starts 100px right
+        }, 1000 / 60);
 
 
-    setInterval( () => {
+        setInterval(() => {
 
-        if(this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
-            // Walk animation
-            this.playAnimation(this.IMAGES_WALKING);
-        }
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMPING);
+            } else {
 
-    }, 50);
-}
+                if (this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
+                    // Walk animation
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
+            }
+
+        }, 50);
+    }
 
     jump() {
-
+        this.speedY = 20;
     }
 }
