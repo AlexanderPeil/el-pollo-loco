@@ -47,7 +47,15 @@ class MovableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-    };
+    }
+
+    // Character is colliding chicken
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height;
+    }
 
     /**
      * Takes an array of image paths and loads them into a cache. It uses the forEach() method to iterate over each path in the array and creates a new Image object for each path.
