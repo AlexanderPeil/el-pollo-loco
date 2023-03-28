@@ -1,11 +1,12 @@
 class World {
     character = new Character();
     level = level1;
-
     canvas; // *1 We need this canvas in this class in the function draw() for clearRect 
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
+
                 // *2
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // *2 We get this canvas from the game.js with the params in the constructor
@@ -42,6 +43,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);// Pushes draw the ctx to the left side
         // Then we draw our elements in the ctx
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.statusBar);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
