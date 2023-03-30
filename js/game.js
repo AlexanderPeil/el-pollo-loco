@@ -48,6 +48,10 @@ window.addEventListener('keydown', (e) => {
         keyboard.W = true;
     }
 
+    if(e.keyCode == 69) {
+        keyboard.E = true;
+    }
+
     // console.log(e);
 });
 
@@ -87,6 +91,10 @@ window.addEventListener('keyup', (e) => {
 
     if(e.keyCode == 87) {
         keyboard.W = false;
+    }
+
+    if(e.keyCode == 69) {
+        keyboard.E = false;
     }
 
     // console.log(e);

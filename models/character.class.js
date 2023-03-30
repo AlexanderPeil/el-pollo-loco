@@ -72,6 +72,10 @@ class Character extends MovableObject {
                 this.jump();
             }
 
+            if (this.world.keyboard.E) {
+                // this.throw();
+            }
+
             this.world.camera_x = -this.x + 100; // The character starts 100px right
         }, 1000 / 60);
 

@@ -6,8 +6,10 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    throwableObjects = [];
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
+    // bottleSound = new Audio('./audio/bottle.mp3');
 
                 // *2
     constructor(canvas, keyboard) {
@@ -16,7 +18,8 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
+        // this.collectObject();
     }
 
     // We "give" the variable world to the class character. So you can use 
@@ -26,16 +29,39 @@ class World {
     }
 
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if(this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            }); 
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);        
     }
+
+
+    checkThrowObjects() {
+        if (this.keyboard.E) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+        }
+    }
+
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if(this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        }); 
+    }
+
+
+    // collectObject() {
+    //     this.level.bottles.forEach((object) => {
+    //         if (this.character.isColliding(object)) {
+    //             this.bottleSound.play();
+    //         }
+    //     });
+    // }
 
 
     draw() {
@@ -57,6 +83,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
 
         this.ctx.translate(-this.camera_x, 0); // Finally we push the ctx back to the right
