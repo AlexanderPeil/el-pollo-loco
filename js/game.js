@@ -5,7 +5,7 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard);    // Will execute world.class.js because init is an body onload function
 
     // console.log('My Charakter is', world.character);
 }

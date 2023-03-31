@@ -25,7 +25,7 @@ class World {
     // We "give" the variable world to the class character. So you can use 
     // the variable keyboard in the class character
     setWorld() {
-        this.character.world = this;
+        this.character.world = this;    // So we "give" the variable wold to the character class
     }
 
 

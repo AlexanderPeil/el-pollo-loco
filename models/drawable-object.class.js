@@ -11,7 +11,7 @@ class DrawableObject {
         // loadImage('img/test.png);
         loadImage(path) {
             this.img = new Image(); // this.img = document.geteElementById('image) <img id="image" src>
-            this.img.src = path;
+            this.img.src = path;    // chicken and chasracter classes have access to this loadImage function to load an image
         }
 
 
@@ -36,13 +36,13 @@ class DrawableObject {
      * Takes an array of image paths and loads them into a cache. It uses the forEach() method to iterate over each path in the array and creates a new Image object for each path.
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
      */
-    loadImages(arr) {
+    loadImages(arr) {   // arr for path of the images (string)
         arr.forEach((path) => {
 
-            let img = new Image();
-            img.src = path;
-            img.style = 'transform: scaleX(-1)';
-            this.imageCache[path] = img;
+            let img = new Image();  // Variable for a new image
+            img.src = path;         // We load the image into the Image object
+            img.style = 'transform: scaleX(-1)';    
+            this.imageCache[path] = img;    // We update the imageCache (with the key "path")
         });
     }
 }

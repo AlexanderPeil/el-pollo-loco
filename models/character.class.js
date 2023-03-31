@@ -39,11 +39,11 @@ class Character extends MovableObject {
         './img/2_character_pepe/4_hurt/H-43.png'
     ];
 
-    world;
+    world; // So we can use the variable of the class world (i.e. keyboard)
     walking_sound = new Audio('./audio/running.mp3');
 
-    constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+    constructor() { 	// If somewhere new Character is called then this function will execute
+        super().loadImage(this.IMAGES_WALKING[0]); // super() = from over class movableObject
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
