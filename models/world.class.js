@@ -5,11 +5,12 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusbarHealth = new StatusbarHealth();
     throwableObjects = [];
-    bottleBar = new BottleBar();
-    coinBar = new CoinBar();
-    // bottleSound = new Audio('./audio/bottle.mp3');
+    statusbarBottle = new Bottlebar();
+    statusbarCoin = new Coinbar();
+    bottleSound = new Audio('./audio/bottle.mp3');
+    coinSound = new Audio('./audio/coin.mp3');
 
                 // *2
     constructor(canvas, keyboard) {
@@ -19,7 +20,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        // this.collectObject();
     }
 
     // We "give" the variable world to the class character. So you can use 
@@ -33,7 +33,9 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);        
+            this.collectBottles();
+            this.collectCoins();
+        }, 1000 / 25);        
     }
 
 
@@ -49,19 +51,42 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                this.statusbarHealth.setPercentage(this.character.energy);
             }
         }); 
     }
 
 
-    // collectObject() {
-    //     this.level.bottles.forEach((object) => {
-    //         if (this.character.isColliding(object)) {
-    //             this.bottleSound.play();
-    //         }
-    //     });
-    // }
+    collectBottles() {
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                this.bottleCollected(bottle);
+                this.bottleSound.play();
+            }
+        });
+    }
+
+
+    collectCoins() {
+        this.level.coins.forEach((coin) => {
+            if ( this.character.isColliding(coin)) {
+                this.coinCollected(coin);
+                this.coinSound.play();
+            }
+        })
+    }
+
+
+    bottleCollected(bottle) {
+        let i = this.level.bottles.indexOf(bottle);
+        this.level.bottles.splice(i, 1);
+    }
+
+
+    coinCollected(coin) {
+        let i = this.level.coins.indexOf(coin);
+        this.level.coins.splice(i, 1);
+    }
 
 
     draw() {
@@ -74,9 +99,9 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); 
         // --------- Space for fixed objects -----
-        this.addToMap(this.statusBar);
-        this.addToMap(this.bottleBar);
-        this.addToMap(this.coinBar);
+        this.addToMap(this.statusbarHealth);
+        this.addToMap(this.statusbarBottle);
+        this.addToMap(this.statusbarCoin);
         this.ctx.translate(this.camera_x, 0); 
 
         this.addToMap(this.character);        
