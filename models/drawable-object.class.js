@@ -16,8 +16,8 @@ class DrawableObject {
 
 
         drawFrame(ctx) {
-
-            if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle) {
+            // Instanceof = We draw a border to the chosen objects, not to all thnigs in the world (i.e not for clouds, background ..).
+            if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle || this instanceof Endboss) {
                 ctx.beginPath();
                 ctx.lineWidth = '5';
                 ctx.strokeStyle = 'blue';

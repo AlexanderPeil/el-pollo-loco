@@ -41,6 +41,7 @@ class Character extends MovableObject {
 
     world; // So we can use the variable of the class world (i.e. keyboard)
     walking_sound = new Audio('./audio/running.mp3');
+    jumping_sound = new Audio('./audio/jump.mp3');
 
     constructor() { 	// If somewhere new Character is called then this function will execute
         super().loadImage(this.IMAGES_WALKING[0]); // super() = from over class movableObject
@@ -59,13 +60,17 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
+                if (!this.isAboveGround()) {
+                    this.walking_sound.play();
+                }
             }
 
             if (this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.play();
+                if (!this.isAboveGround()) {
+                    this.walking_sound.play();
+                }
             }
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -82,7 +87,7 @@ class Character extends MovableObject {
 
         setInterval(() => {
 
-             if (this.isDead()) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
@@ -95,11 +100,11 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-
         }, 50);
     }
 
     jump() {
         this.speedY = 20;
+        this.jumping_sound.play();
     }
 }

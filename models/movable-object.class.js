@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
-    energy = 100;
+    energy = 50;
     lastHit = 0;
 
 
@@ -47,9 +47,26 @@ class MovableObject extends DrawableObject {
 
 
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit;
-        timePassed = timePassed / 1000;
-        return timePassed < 0.5;
+        let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
+        timePassed = timePassed / 1000;                         // Difference in sec
+        return timePassed < 0.5;    // If the character was hit in the last 0.5 sec the function would return to true and playAnimation will start in the character class
+    }
+
+
+    hitEndboss() {
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+    
+
+    endbossIsHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; 
+        timePassed = timePassed / 1000;                         
+        return timePassed < 0.5;    
     }
 
 
