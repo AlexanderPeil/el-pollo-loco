@@ -80,7 +80,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.E) {
                 // this.throw();
             }
-
+            console.log(this.otherDirection)
             this.world.camera_x = -this.x + 100; // The character starts 100px right
         }, 1000 / 60);
 
