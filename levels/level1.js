@@ -23,10 +23,14 @@ const level1 = new Level(
         new Endboss()
     ],
     [
-        new Cloud('./img/5_background/layers/4_clouds/1.png'),
-        new Cloud('./img/5_background/layers/4_clouds/2.png'),
-        new Cloud('./img/5_background/layers/4_clouds/1.png'),
-        new Cloud('./img/5_background/layers/4_clouds/2.png')
+        new Cloud('./img/5_background/layers/4_clouds/1.png', 100),
+        new Cloud('./img/5_background/layers/4_clouds/2.png', 600),
+        new Cloud('./img/5_background/layers/4_clouds/1.png', 1100),
+        new Cloud('./img/5_background/layers/4_clouds/2.png', 1600),
+        new Cloud('./img/5_background/layers/4_clouds/1.png', 2100),
+        new Cloud('./img/5_background/layers/4_clouds/2.png', 2600),
+        new Cloud('./img/5_background/layers/4_clouds/1.png', 3100),
+        new Cloud('./img/5_background/layers/4_clouds/2.png', 3600)
     ],
     [   
         new Bottle(),
