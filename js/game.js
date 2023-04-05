@@ -3,11 +3,19 @@ let world;
 let keyboard = new Keyboard();
 
 
-function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);    // Will execute world.class.js because init is an body onload function
+function startGame() {
+    setTimeout(() => {
+        initLevel();
+        hideElements();
+        canvas = document.getElementById('canvas');
+        world = new World(canvas, keyboard);
+    }, 3500);
+}
 
-    // console.log('My Charakter is', world.character);
+function hideElements() {
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('start-btn').classList.add('d-none');
 }
 
 

@@ -24,6 +24,20 @@ h1 {
     display: none;
 }
 
+#start-btn {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 13px;
+    right: 89px;
+}
+
+#start-btn:hover {
+    cursor: pointer;
+    transition: 225ms ease-in-out;
+    transform: scale(1.2);
+}
+
 .position-relative {
     position: relative;
 }
