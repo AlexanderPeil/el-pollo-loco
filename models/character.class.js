@@ -103,7 +103,7 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.speedY = 20;
+        this.speedY = 30;
         this.jumping_sound.play();
     }
 }

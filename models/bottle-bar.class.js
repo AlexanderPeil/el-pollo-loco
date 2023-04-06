@@ -17,9 +17,4 @@ class Bottlebar extends Statusbar {
         super().loadImages(this.IMAGES);
         this.setPercentage(0);
     }
-
-
-    // addBottleToBAr() {
-    //     this.
-    // }
 }

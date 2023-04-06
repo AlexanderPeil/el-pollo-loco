@@ -42,9 +42,10 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.E && this.character.bottles > 0) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
+            let bottle = new ThrowableObject(this.character.x , this.character.y , this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
+            this.statusbarBottle.setPercentage(this.character.bottles);
         }
     }
 
