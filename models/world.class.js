@@ -12,6 +12,7 @@ class World {
     bottleSound = new Audio('./audio/bottle.mp3');
     coinSound = new Audio('./audio/coin.mp3');
     deadChicken = new Audio('./audio/chicken.mp3');
+    throwSound = new Audio('./audio/throw.mp3');
 
     // *2
     constructor(canvas, keyboard) {
@@ -43,6 +44,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.E && this.character.bottles > 0) {
             let bottle = new ThrowableObject(this.character.x , this.character.y , this.character.otherDirection);
+            this.throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
             this.statusbarBottle.setPercentage(this.character.bottles);
@@ -65,13 +67,21 @@ class World {
 
 
     killChicken(enemy) {
-        this.character.speedY = 18;
+        this.character.speedY = 30;
         this.deadChicken.play();
         setTimeout(() => {
             this.deleteEnemy(enemy);
         }, 100);
     }
 
+
+    // killChickenWithBottle() {
+    //     this.level.enemies.forEach((enemy) => {
+    //         if (this.bottles.isColliding(enemy)) {
+    //             this.killChicken(enemy);
+    //         }
+    //     });
+    // }
 
     deleteEnemy(enemy) {
         let i = this.level.enemies.indexOf(enemy);

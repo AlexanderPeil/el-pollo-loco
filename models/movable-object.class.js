@@ -23,6 +23,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // Throwable object should always fall
             return true;
         } else {
+            // console.log(this.y);
             return this.y < 155;
         }
     }
@@ -107,7 +108,7 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
-    jump() {
-        this.speedY = 20;
-    }
+    // jump() {
+    //     this.speedY = 20;
+    // }
 }
