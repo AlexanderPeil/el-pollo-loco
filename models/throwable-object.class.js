@@ -18,19 +18,18 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+
     throw() {
-        this.speedY = 20;
+        this.speedY = 15;
         this.applyGravity();
         let throwInterval = setInterval(() => {
-            console.log('intervall gestartet')
             if (this.characterDirection) {
-                this.x -= 10;
+                this.x -= 15;
             } else {
-                this.x += 10;
+                this.x += 15;
             }
         }, 25);
         setTimeout(() =>{
-            console.log('intervall gestoppt')
             clearInterval(throwInterval);
         }, 1000)
     }

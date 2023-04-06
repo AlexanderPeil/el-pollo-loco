@@ -72,9 +72,6 @@ let level1;
             new Coin(),
             new Coin(),
             new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
             new Coin()
         ]
     }

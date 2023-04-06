@@ -5,6 +5,8 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     energy = 50;
     lastHit = 0;
+    coins = 0;
+    bottles = 0;
 
 
     applyGravity() {
@@ -50,6 +52,16 @@ class MovableObject extends DrawableObject {
         let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
         timePassed = timePassed / 1000;                         // Difference in sec
         return timePassed < 0.5;    // If the character was hit in the last 0.5 sec the function would return to true and playAnimation will start in the character class
+    }
+
+
+    addCoin() {
+        this.coins += 10;
+    }
+
+
+    addBottle() {
+        this.bottles += 10;
     }
 
 
