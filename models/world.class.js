@@ -9,6 +9,7 @@ class World {
     throwableObjects = [];
     statusbarBottle = new Bottlebar();
     statusbarCoin = new Coinbar();
+    enbosshealthBar = new EndbossHealthBar();
     bottleSound = new Audio('./audio/bottle.mp3');
     coinSound = new Audio('./audio/coin.mp3');
     deadChicken = new Audio('./audio/chicken.mp3');
@@ -37,6 +38,7 @@ class World {
             this.checkThrowObjects();
             this.collectBottles();
             this.collectCoins();
+            this.hitEndboss();
         }, 1000 / 25);
     }
 
@@ -75,24 +77,28 @@ class World {
     }
 
 
-    // killChickenWithBottle() {
-    //     this.level.enemies.forEach((enemy) => {
-    //         if (this.bottles.isColliding(enemy)) {
-    //             this.killChicken(enemy);
-    //         }
-    //     });
+    hitEndboss() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.endboss.forEach(endboss => {
+                if (bottle.isColliding(endboss)) {
+                    endboss.hitEndboss();
+                    this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
+                    // this.deleteBottle(bottle);
+                }
+            });
+        });
+    }
+
+
+    // deleteBottle(bottle) {
+    //     let i = this.throwableObjects.indexOf(bottle);
+    //     this.level.bottles.splice(i, 1);
     // }
+
 
     deleteEnemy(enemy) {
         let i = this.level.enemies.indexOf(enemy);
         this.level.enemies.splice(i, 1);
-    }
-
-
-    checkHitEndboss() {
-        if (bottle.isColliding(endboss)) {
-            endboss.hitEndboss(endboss.energy);
-        }
     }
 
 
@@ -145,6 +151,7 @@ class World {
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
+        this.addToMap(this.enbosshealthBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);

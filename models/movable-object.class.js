@@ -68,6 +68,7 @@ class MovableObject extends DrawableObject {
 
     hitEndboss() {
         this.energy -= 10;
+        console.log(this.energy);
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -107,8 +108,4 @@ class MovableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
     }
-
-    // jump() {
-    //     this.speedY = 20;
-    // }
 }
