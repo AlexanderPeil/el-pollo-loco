@@ -89,6 +89,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    chickenKilled() {
+        return this.energy = 0;
+    }
+
+
     // plays an animation using a sequence of images. The function takes an array of image paths as input and cycles through the array to display each image in turn.
     // The function uses the modulo operator (%) to calculate the index of the current image to display.
     playAnimation(images) {

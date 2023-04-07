@@ -38,7 +38,7 @@ class World {
             this.checkThrowObjects();
             this.collectBottles();
             this.collectCoins();
-            this.hitEndboss();
+            this.killEnemyWithBottle();
         }, 1000 / 25);
     }
 
@@ -71,9 +71,34 @@ class World {
     killChicken(enemy) {
         this.character.speedY = 30;
         this.deadChicken.play();
+        enemy.chickenKilled();
+
         setTimeout(() => {
             this.deleteEnemy(enemy);
-        }, 100);
+        }, 500);
+    }
+
+
+    killChickenWithBottle() {   
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach(enemy => {
+                if (bottle.isColliding(enemy)) {
+                    this.chickenKilledWithBottle(enemy);
+                }
+            });
+        });
+    }
+
+
+    chickenKilledWithBottle(enemy) {
+        this.deadChicken.play();
+        this.deleteEnemy(enemy);
+    }
+
+
+    killEnemyWithBottle() {
+        this.hitEndboss();
+        this.killChickenWithBottle();
     }
 
 
@@ -83,17 +108,10 @@ class World {
                 if (bottle.isColliding(endboss)) {
                     endboss.hitEndboss();
                     this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
-                    // this.deleteBottle(bottle);
                 }
             });
         });
     }
-
-
-    // deleteBottle(bottle) {
-    //     let i = this.throwableObjects.indexOf(bottle);
-    //     this.level.bottles.splice(i, 1);
-    // }
 
 
     deleteEnemy(enemy) {

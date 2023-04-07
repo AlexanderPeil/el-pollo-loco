@@ -64,7 +64,7 @@ class Endboss extends MovableObject {
     startEndbossFight(i) {
         if (i < 15) {
             this.playAnimation(this.IMAGES_ALERT);
-        } else if (!this.isDead() && !this.endbossIsHurt()) {
+        } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
         } else if (this.endbossIsHurt()) {
@@ -72,6 +72,11 @@ class Endboss extends MovableObject {
         } else if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
         }
+    }
+
+
+    endbossFightBegins() {
+        return world.character.x > world.level.endboss[0].x - 1000;
     }
 
 
