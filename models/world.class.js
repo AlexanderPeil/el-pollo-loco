@@ -92,7 +92,11 @@ class World {
 
     chickenKilledWithBottle(enemy) {
         this.deadChicken.play();
-        this.deleteEnemy(enemy);
+        enemy.chickenKilled();
+
+        setTimeout(() => {
+            this.deleteEnemy(enemy);
+        }, 500);
     }
 
 
