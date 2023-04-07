@@ -21,7 +21,7 @@ h1 {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 #start-btn {
@@ -51,10 +51,40 @@ h1 {
     height: 480px;
 }
 
+#mobile-btns-bottom {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    justify-content: space-between;
+    width: 95%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.mobile-btns-flex {
+    display: flex;
+    gap: 10px;
+}
+
+.mobile-btns {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+
+
 @media (max-width: 820px) {
     #start-screen {
         width: 100%;
         height: 100%;
+    }
+
+    #mobile-btns-bottom {
+        display: flex !important;
     }
 }
 

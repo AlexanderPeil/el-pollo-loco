@@ -7,6 +7,7 @@ function startGame() {
     setTimeout(() => {
         initLevel();
         hideElements();
+        mobileButtons();
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
     }, 500);
