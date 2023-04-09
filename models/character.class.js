@@ -39,9 +39,11 @@ class Character extends MovableObject {
         './img/2_character_pepe/4_hurt/H-43.png'
     ];
 
+    intervalIds = [];
     world; // So we can use the variable of the class world (i.e. keyboard)
     walking_sound = new Audio('./audio/running.mp3');
     jumping_sound = new Audio('./audio/jump.mp3');
+    death_sound = new Audio('./audio/death-sound.mp3');
 
     constructor() { 	// If somewhere new Character is called then this function will execute
         super().loadImage(this.IMAGES_WALKING[0]); // super() = from over class movableObject
@@ -54,56 +56,69 @@ class Character extends MovableObject {
     }
 
     animate() {
-
-        setInterval(() => {
-            this.walking_sound.pause(); // The sound will play only if you push the walk button else it won't play
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                if (!this.isAboveGround()) {
-                    this.walking_sound.play();
-                }
-            }
-
-            if (this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                if (!this.isAboveGround()) {
-                    this.walking_sound.play();
-                }
-            }
-
-            if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            if (this.world.keyboard.E) {
-                // this.throw();
-            }
-            this.world.camera_x = -this.x + 100; // The character starts 100px right
-        }, 1000 / 60);
-
-
-        setInterval(() => {
-
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-
-                if (this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
-                    // Walk animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
-            }
-        }, 50);
+        setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+        setStoppableInterval(() => this.playCharacter(), 80);
     }
+
+
+    moveCharacter() {
+        this.world.camera_x = -this.x + 100;
+        this.walking_sound.pause(); 
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            if (!this.isAboveGround()) {
+                this.walking_sound.play();
+            }
+        }
+
+        if (this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true;
+            if (!this.isAboveGround()) {
+                this.walking_sound.play();
+            }
+        }
+
+        if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+        }
+    }
+
+
+    playCharacter() {
+        if (this.isDead()) {
+            this.deathRoutine();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_JUMPING);
+        } else {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }
+    }
+
 
     jump() {
         this.speedY = 30;
         this.jumping_sound.play();
+    }
+
+
+    deathRoutine() {
+        this.playAnimation(this.IMAGES_DEAD);
+        this.death_sound.play();
+        stopGame();
+
+        setTimeout(() => {
+            this.deathScreen()
+        }, 1500);
+    }
+
+
+    deathScreen() {
+        document.getElementById('death-screen-container').classList.remove('d-none');
     }
 }

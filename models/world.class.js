@@ -14,6 +14,7 @@ class World {
     coinSound = new Audio('./audio/coin.mp3');
     deadChicken = new Audio('./audio/chicken.mp3');
     throwSound = new Audio('./audio/throw.mp3');
+    intervalIds = [];
 
     // *2
     constructor(canvas, keyboard) {

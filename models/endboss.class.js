@@ -70,7 +70,7 @@ class Endboss extends MovableObject {
         } else if (this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.deathRoutine();
         }
     }
 
@@ -82,5 +82,10 @@ class Endboss extends MovableObject {
 
     endbossReached() {
         return world.character.x > 3800 && !hadFirstContact;
+    }
+
+
+    deathRoutine() {
+        this.playAnimation(this.IMAGES_DEAD);        
     }
 }
