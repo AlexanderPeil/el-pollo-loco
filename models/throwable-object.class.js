@@ -17,6 +17,7 @@ class ThrowableObject extends MovableObject {
     ]
 
     characterDirection;
+    bottle_splash = new Audio('./audio/bottle-splash.mp3');
 
 
     constructor(x, y, otherDirection) {
@@ -50,8 +51,22 @@ class ThrowableObject extends MovableObject {
 
 
     animateBottle() {
-        setInterval(() => {
-            this.playAnimation(this.ROTATING_IMAGES);
-        }, 50);
+        this.splash = setInterval(() => {
+            if (this.y > 350 || world.collidesWithEndboss) {
+                this.collisionAnimation();
+            } else {
+                this.playAnimation(this.ROTATING_IMAGES);
+            }
+        }, 1000 / 60);
+        
+        setInterval(() => world.collidesWithEndboss = false, 100);
+    }
+
+
+    collisionAnimation() {
+        this.playAnimation(this.IMAGES_SPLASH);
+        this.x = 0;
+        this.bottle_splash.play();
+        clearInterval(this.splash);
     }
 }

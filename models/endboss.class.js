@@ -36,6 +36,7 @@ class Endboss extends MovableObject {
     ]
 
     hadFirstContact = false;
+    win_sound = new Audio('./audio/win.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -87,5 +88,6 @@ class Endboss extends MovableObject {
 
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);        
+        this.win_sound.play();
     }
 }

@@ -16,8 +16,8 @@ canvas {
 }
 
 h1 {
-    font-size: 64px;
     letter-spacing: 3px;
+    font-size: 64px;
 }
 
 .d-none {
@@ -77,7 +77,8 @@ h1 {
 
 .death-screen {
     color: red;
-    font-size: 150px;
+    animation: grow 3s;
+    animation-fill-mode: forwards;
     letter-spacing: 15px;
 }
 
@@ -89,6 +90,15 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@keyframes grow {
+    from {
+        font-size: 64px;
+    }
+    to {
+        font-size: 128px;
+    }
 }
 
 

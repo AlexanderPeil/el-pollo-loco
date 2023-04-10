@@ -15,6 +15,7 @@ class World {
     deadChicken = new Audio('./audio/chicken.mp3');
     throwSound = new Audio('./audio/throw.mp3');
     intervalIds = [];
+    collidesWithEndboss = false;
 
     // *2
     constructor(canvas, keyboard) {
@@ -35,7 +36,8 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisionsWithChicken();
+            this.checkCollisionsWithEndboss()
             this.checkThrowObjects();
             this.collectBottles();
             this.collectCoins();
@@ -55,7 +57,7 @@ class World {
     }
 
 
-    checkCollisions() {
+    checkCollisionsWithChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isHurt()) {
                 if (this.character.isAboveGround()) {
@@ -64,6 +66,15 @@ class World {
                     this.character.hit();
                     this.statusbarHealth.setPercentage(this.character.energy);
                 }
+            }
+        });
+    }
+
+    checkCollisionsWithEndboss() {
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
+                this.character.hit();
+                this.statusbarHealth.setPercentage(this.character.energy);
             }
         });
     }
@@ -111,7 +122,8 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach(endboss => {
                 if (bottle.isColliding(endboss)) {
-                    endboss.hitEndboss();
+                    this.collidesWithEndboss = true;
+                    endboss.hurtEndboss();
                     this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
                 }
             });
