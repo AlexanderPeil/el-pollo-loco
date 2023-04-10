@@ -10,10 +10,7 @@ class World {
     statusbarBottle = new Bottlebar();
     statusbarCoin = new Coinbar();
     enbosshealthBar = new EndbossHealthBar();
-    bottleSound = new Audio('./audio/bottle.mp3');
-    coinSound = new Audio('./audio/coin.mp3');
-    deadChicken = new Audio('./audio/chicken.mp3');
-    throwSound = new Audio('./audio/throw.mp3');
+
     intervalIds = [];
     collidesWithEndboss = false;
     lastThrow = false;
@@ -61,7 +58,7 @@ class World {
             this.alreadyThrow = true;
             this.lastThrow = true;
             let bottle = new ThrowableObject(this.character.x , this.character.y , this.character.otherDirection);
-            this.throwSound.play();
+            throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
             this.statusbarBottle.setPercentage(this.character.bottles);
@@ -76,7 +73,7 @@ class World {
             this.alreadyThrow = false;
             setTimeout(() => {
                 this.lastThrow = false;
-            }, 750);
+            }, 1000);
         }
     }
 
@@ -106,7 +103,7 @@ class World {
 
     killChicken(enemy) {
         this.character.speedY = 30;
-        this.deadChicken.play();
+        deadChicken.play();
         enemy.chickenKilled();
 
         setTimeout(() => {
@@ -127,7 +124,7 @@ class World {
 
 
     chickenKilledWithBottle(enemy) {
-        this.deadChicken.play();
+        deadChicken.play();
         enemy.chickenKilled();
 
         setTimeout(() => {
@@ -165,7 +162,7 @@ class World {
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle) && this.character.bottles < 50) {
                 this.bottleCollected(bottle);
-                this.bottleSound.play();
+                bottleSound.play();
                 this.character.addBottle();
                 this.statusbarBottle.setPercentage(this.character.bottles);
             }
@@ -177,7 +174,7 @@ class World {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
                 this.coinCollected(coin);
-                this.coinSound.play();
+                coinSound.play();
                 this.character.addCoin();
                 this.statusbarCoin.setPercentage(this.character.coins);
             }

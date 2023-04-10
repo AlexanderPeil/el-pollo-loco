@@ -2,6 +2,15 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
+walking_sound = new Audio('./audio/running.mp3');
+jumping_sound = new Audio('./audio/jump.mp3');
+death_sound = new Audio('./audio/death-sound.mp3');
+win_sound = new Audio('./audio/win.mp3');
+bottle_splash = new Audio('./audio/bottle-splash.mp3');
+bottleSound = new Audio('./audio/bottle.mp3');
+coinSound = new Audio('./audio/coin.mp3');
+deadChicken = new Audio('./audio/chicken.mp3');
+throwSound = new Audio('./audio/throw.mp3');
 
 // Time must be increased after I'm finished with programming the game
 function startGame() {
@@ -9,6 +18,7 @@ function startGame() {
         initLevel();
         hideElements();
         mobileButtons();
+        showButtons();
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
     }, 500); 
@@ -25,11 +35,63 @@ function stopGame() {
     intervalIds.forEach(clearInterval);
 }
 
+function showButtons() {
+    document.getElementById('mute-sound').classList.remove('d-none');
+    document.getElementById('fullscreen-btn').classList.remove('d-none');
+}
+
 
 function hideElements() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('start-btn').classList.add('d-none');
+}
+
+
+function muteSound() {
+    document.getElementById('unmute-sound').classList.remove('d-none');
+    walking_sound.volume = 0;
+    jumping_sound.volume = 0;
+    death_sound.volume = 0;
+    win_sound.volume = 0;
+    bottle_splash.volume = 0;
+    bottleSound.volume = 0;
+    coinSound.volume = 0;
+    deadChicken.volume = 0;
+    throwSound.volume = 0;
+}
+
+
+function unmuteSound() {
+    document.getElementById('unmute-sound').classList.add('d-none');
+    document.getElementById('mute-sound').classList.remove('d-none');
+    walking_sound.volume = 1;
+    jumping_sound.volume = 1;
+    death_sound.volume = 1;
+    win_sound.volume = 1;
+    bottle_splash.volume = 1;
+    bottleSound.volume = 1;
+    coinSound.volume = 1;
+    deadChicken.volume = 1;
+    throwSound.volume = 1;
+}
+
+
+function openControls() {
+    document.getElementById('controls-container').classList.remove('d-none');
+    // document.getElementById('startscreen-container').classList.add('d-none');
+    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+    document.getElementById('fullscreen').classList.add('d-none');
+}
+
+
+function closeControlsContainer() {
+    document.getElementById('controls-container').classList.add('d-none');
+    // document.getElementById('startscreen-container').classList.remove('d-none');
+    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
+    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
+    document.getElementById('fullscreen').classList.remove('d-none');
 }
 
 
