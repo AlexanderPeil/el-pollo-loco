@@ -16,6 +16,8 @@ class World {
     throwSound = new Audio('./audio/throw.mp3');
     intervalIds = [];
     collidesWithEndboss = false;
+    lastThrow = false;
+    alreadyThrow = false;
 
     // *2
     constructor(canvas, keyboard) {
@@ -38,7 +40,8 @@ class World {
         setInterval(() => {
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithEndboss()
-            this.checkThrowObjects();
+            this.checkTimerForThrow();
+            // this.checkThrowObjects();
             this.collectBottles();
             this.collectCoins();
             this.killEnemyWithBottle();
@@ -46,13 +49,34 @@ class World {
     }
 
 
+    checkTimerForThrow() {
+        setStoppableInterval(() => {
+            this.checkThrowObjects();
+        }, 1000 / 60);
+    }
+
+
     checkThrowObjects() {
-        if (this.keyboard.E && this.character.bottles > 0) {
+        if (this.keyboard.E && this.character.bottles > 0 && !this.lastThrow) {
+            this.alreadyThrow = true;
+            this.lastThrow = true;
             let bottle = new ThrowableObject(this.character.x , this.character.y , this.character.otherDirection);
             this.throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
             this.statusbarBottle.setPercentage(this.character.bottles);
+        } else {
+            this.timerForThrow();
+        }
+    }
+
+
+    timerForThrow() {
+        if (this.alreadyThrow) {
+            this.alreadyThrow = false;
+            setTimeout(() => {
+                this.lastThrow = false;
+            }, 750);
         }
     }
 
