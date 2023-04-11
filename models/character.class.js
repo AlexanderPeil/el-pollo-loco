@@ -88,6 +88,7 @@ class Character extends MovableObject {
         if (this.isDead()) {
             this.deathRoutine();
         } else if (this.isHurt()) {
+            hurt_sound.play();
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);

@@ -36,9 +36,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisionsWithChicken();
-            this.checkCollisionsWithEndboss()
+            this.checkCollisionsWithEndboss();
             this.checkTimerForThrow();
-            // this.checkThrowObjects();
             this.collectBottles();
             this.collectCoins();
             this.killEnemyWithBottle();
@@ -105,6 +104,7 @@ class World {
         this.character.speedY = 30;
         deadChicken.play();
         enemy.chickenKilled();
+        
 
         setTimeout(() => {
             this.deleteEnemy(enemy);

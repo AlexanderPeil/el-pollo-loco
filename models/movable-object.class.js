@@ -7,23 +7,26 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     coins = 0;
     bottles = 0;
+    timePassed = 0; 
 
 
     applyGravity() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+            } if (this.y > 155) {
+                this.y = 155;
             }
         }, 1000 / 25);
     }
 
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // Throwable object should always fall
+        if (this instanceof ThrowableObject) { 
             return true;
         } else {
-            // console.log(this.y);
+            console.log(this.y);
             return this.y < 155;
         }
     }
@@ -49,10 +52,19 @@ class MovableObject extends DrawableObject {
     }
 
 
+    isInvulnerable() {
+        if (this.timePassed < 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timePassed = timePassed / 1000;                         // Difference in sec
-        return timePassed < 0.5;    // If the character was hit in the last 0.5 sec the function would return to true and playAnimation will start in the character class
+        this.timePassed = new Date().getTime() - this.lastHit; 
+        this.timePassed = this.timePassed / 1000;                         
+        return this.timePassed < 1;    
     }
 
 
@@ -67,7 +79,6 @@ class MovableObject extends DrawableObject {
 
 
     hurtEndboss() {
-        console.log('Enboss was hitted!');
         this.energy -= 10;
         if (this.energy < 0) {
             this.energy = 0;

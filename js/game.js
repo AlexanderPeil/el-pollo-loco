@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let intervalIds = [];
 walking_sound = new Audio('./audio/running.mp3');
 jumping_sound = new Audio('./audio/jump.mp3');
+hurt_sound = new Audio('./audio/hurt.mp3');
 death_sound = new Audio('./audio/death-sound.mp3');
 win_sound = new Audio('./audio/win.mp3');
 bottle_splash = new Audio('./audio/bottle-splash.mp3');
@@ -66,6 +67,7 @@ function muteSound() {
     document.getElementById('unmute-sound').classList.remove('d-none');
     walking_sound.volume = 0;
     jumping_sound.volume = 0;
+    hurt_sound.volume = 0;
     death_sound.volume = 0;
     win_sound.volume = 0;
     bottle_splash.volume = 0;
@@ -81,6 +83,7 @@ function unmuteSound() {
     document.getElementById('mute-sound').classList.remove('d-none');
     walking_sound.volume = 1;
     jumping_sound.volume = 1;
+    hurt_sound.volume = 1;
     death_sound.volume = 1;
     win_sound.volume = 1;
     bottle_splash.volume = 1;
