@@ -44,6 +44,7 @@
             <img id="start-btn" src="img/start-btn.png" onclick="startGame()">
             <img id="controls" src="img/controls.png" onclick="openControls()">
         </div>
+
         <div id="mobile-btns-bottom" class="d-none">
             <div class="mobile-btns-flex">
                 <div class="mobile-btns">
@@ -53,6 +54,7 @@
                     <img id="btn-right" src="img/arrow-right.png">
                 </div>
             </div>
+
             <div class="mobile-btns-flex">
                 <div class="mobile-btns">
                     <img id="btn-jump" src="img/arrow-up.png">
@@ -64,9 +66,15 @@
         </div>
     </div>
 
-    <div id="death-screen-container" class="d-none">
+    <div id="death-screen-container" class="game-over-container d-none">
         <h2 class="death-screen">YOU DIED</h2>
     </div>
+
+    <div id="restart-container" class="restart-container game-over-container d-none">
+        <h2 onclick="restartGame()">RESTART GAME</h2>
+        <h2 onclick="mainMenu()">MAIN MENU</h2>
+    </div>
+
     <div id="controls-container" class="d-none">
         <img id="controls-container-back" src="img/arrow-left.png" onclick="closeControlsContainer()">
         <h2 class="game-controls">Game Controls</h2>

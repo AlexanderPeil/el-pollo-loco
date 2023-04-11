@@ -12,7 +12,7 @@ coinSound = new Audio('./audio/coin.mp3');
 deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
 
-// Time must be increased after I'm finished with programming the game
+// Time must be increased after I'm finished with the game
 function startGame() {
     setTimeout(() => {
         initLevel();
@@ -45,6 +45,20 @@ function hideElements() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('start-btn').classList.add('d-none');
+    document.getElementById('controls').classList.add('d-none');
+}
+
+
+function restartGame() {
+    document.getElementById('restart-container').classList.add('d-none');
+    document.getElementById('death-screen-container').classList.add('d-none');
+    clearAllIntervals();
+    startGame();
+}
+
+
+function mainMenu() {
+    window.location.reload();
 }
 
 
@@ -92,6 +106,11 @@ function closeControlsContainer() {
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
     document.getElementById('fullscreen').classList.remove('d-none');
+}
+
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++)  window.clearInterval(i);
 }
 
 
