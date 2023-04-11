@@ -92,7 +92,7 @@ class World {
 
     checkCollisionsWithEndboss() {
         this.level.endboss.forEach((endboss) => {
-            if (this.character.isColliding(endboss)) {
+            if (this.character.isColliding(endboss) && !this.character.isInvulnerable()) {
                 this.character.hit();
                 this.statusbarHealth.setPercentage(this.character.energy);
             }

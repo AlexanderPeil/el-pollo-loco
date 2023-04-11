@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     coins = 0;
     bottles = 0;
-    timePassed = 0; 
+    timePassed; 
 
 
     applyGravity() {
@@ -15,9 +15,7 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
-            } if (this.y > 155) {
-                this.y = 155;
-            }
+            } 
         }, 1000 / 25);
     }
 
@@ -26,7 +24,6 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { 
             return true;
         } else {
-            console.log(this.y);
             return this.y < 155;
         }
     }
@@ -53,7 +50,7 @@ class MovableObject extends DrawableObject {
 
 
     isInvulnerable() {
-        if (this.timePassed < 2) {
+        if (this.timePassed < 1) {
             return true;
         } else {
             return false;

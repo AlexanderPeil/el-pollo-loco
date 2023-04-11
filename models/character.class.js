@@ -49,7 +49,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        this.applyGravity();
+        this.checkApplyGravity();
         this.animate();
     }
 
@@ -103,6 +103,18 @@ class Character extends MovableObject {
     jump() {
         this.speedY = 30;
         jumping_sound.play();
+    }
+
+
+    checkApplyGravity() {
+        setStoppableInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            } if (this.y > 155) {
+                this.y = 155;
+            }
+        }, 1000 / 25);
     }
 
 

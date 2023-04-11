@@ -47,6 +47,7 @@ class Endboss extends MovableObject {
     ]
 
     hadFirstContact = false;
+    intervalIds = [];
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -61,7 +62,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        setInterval(() => {
+        this.endbossFight = setInterval(() => {
             this.startEndbossFight(i);
             i++;
             if (this.endbossReached()) {
@@ -82,6 +83,7 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isDead()) {
             this.deathRoutine();
+            gameWonContainer();
         }
     }
 
@@ -99,5 +101,12 @@ class Endboss extends MovableObject {
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);        
         win_sound.play();
+        setTimeout(() => {
+            clearInterval(this.endbossFight);
+        }, 200);
+
+        setTimeout(() => {
+            document.getElementById('game-won-container').classList.remove('d-none');
+        }, 1000);
     }
 }
