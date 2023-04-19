@@ -25,6 +25,15 @@ class DrawableObject {
                 ctx.stroke();
             }
         }
+
+
+        // if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Throwableobject) {
+        //     ctx.beginPath();
+        //     ctx.lineWidth = '5';
+        //     ctx.strokeStyle = 'red';
+        //     ctx.rect(this.x + this.offset.x, this.y + this.offset.y,(this.x + this.width - this.offset.width) - (this.x + this.offset.x),(this.y + this.height - this.offset.height) - (this.y + this.offset.y));
+        //     ctx.stroke();
+        // }
     
     
         draw(ctx) {

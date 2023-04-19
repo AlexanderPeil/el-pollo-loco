@@ -55,20 +55,21 @@ class ThrowableObject extends MovableObject {
             if (this.y > 350 || world.collidesWithEndboss) {
                 this.playAnimation(this.IMAGES_SPLASH);
                 bottle_splash.play();
-                this.collisionAnimation();
+                setTimeout(() => {
+                    this.collisionAnimation();
+                }, 1000);
             } else {
                 this.playAnimation(this.ROTATING_IMAGES);
             }
-        }, 1000 / 20);
+        }, 1000 / 60);
         
         setInterval(() => world.collidesWithEndboss = false, 100);
     }
 
 
     collisionAnimation() {
-        // this.playAnimation(this.IMAGES_SPLASH);
         this.x = 0;
-
+        
         clearInterval(this.splash);
     }
 }

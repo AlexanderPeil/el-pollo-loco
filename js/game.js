@@ -117,6 +117,20 @@ function closeControlsContainer() {
 }
 
 
+function fullscreen() {
+    if (canvas.requestFullscreen) {
+        canvas.requestFullscreen();
+    } else if (canvas.webkitRequestFullscreen) {
+        /* Safari */
+        canvas.webkitRequestFullscreen();
+    } else if (canvas.msRequestFullscreen) {
+        /* IE11 */
+        canvas.msRequestFullscreen();
+    }
+}
+
+
+
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++)  window.clearInterval(i);
 }
