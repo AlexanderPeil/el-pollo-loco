@@ -132,16 +132,7 @@ class Character extends MovableObject {
         stopGame();
 
         setTimeout(() => {
-            this.deathScreen()
+            deathScreen()
         }, 1000);
-    }
-
-
-    deathScreen() {
-        document.getElementById('death-screen-container').classList.remove('d-none');
-
-        setTimeout(() => {
-            document.getElementById('restart-container').classList.remove('d-none');
-        }, 3000);
     }
 }

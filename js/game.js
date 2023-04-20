@@ -130,6 +130,16 @@ function fullscreen() {
 }
 
 
+function deathScreen() {
+    document.getElementById('death-screen-container').classList.remove('d-none');
+
+    setTimeout(() => {
+        document.getElementById('restart-container').classList.remove('d-none');
+        
+    }, 3000);
+}
+
+
 
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++)  window.clearInterval(i);

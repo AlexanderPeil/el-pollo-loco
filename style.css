@@ -127,6 +127,8 @@ h1 {
     letter-spacing: 15px;
     flex-direction: column;
     color: red;
+    width: 820px;
+    height: 480px;
 }
 
 .game-over-container h1 {

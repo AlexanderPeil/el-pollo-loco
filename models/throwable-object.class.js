@@ -63,13 +63,12 @@ class ThrowableObject extends MovableObject {
             }
         }, 1000 / 60);
         
-        setInterval(() => world.collidesWithEndboss = false, 100);
+        setInterval(() => world.collidesWithEndboss = false, 1000 / 60);
     }
 
 
     collisionAnimation() {
-        this.x = 0;
-        
+        this.x = 0;        
         clearInterval(this.splash);
     }
 }
