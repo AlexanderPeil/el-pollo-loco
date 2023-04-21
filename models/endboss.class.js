@@ -90,7 +90,7 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isDead()) {
             this.deathRoutine();
-            gameWonContainer();
+            // gameWonContainer();
         }
     }
 
@@ -113,7 +113,7 @@ class Endboss extends MovableObject {
         }, 200);
 
         setTimeout(() => {
-            document.getElementById('game-won-container').classList.remove('d-none');
+            gameWon();
         }, 1000);
     }
 }

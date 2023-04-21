@@ -42,6 +42,21 @@ function showButtons() {
 }
 
 
+function deathScreen() {
+    document.getElementById('death-screen-container').classList.remove('d-none');
+
+    setTimeout(() => {
+        document.getElementById('death-screen-container').classList.add('d-none');
+        document.getElementById('canvas').classList.add('d-none'); 
+        document.getElementById('mute-sound').classList.add('d-none'); 
+        document.getElementById('unmute-sound').classList.add('d-none'); 
+        document.getElementById('fullscreen-btn').classList.add('d-none'); 
+        document.getElementById('mobile-btns-bottom').classList.add('d-none'); 
+        document.getElementById('restart-container').classList.remove('d-none');        
+    }, 2000);
+}
+
+
 function hideElements() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
@@ -58,8 +73,13 @@ function restartGame() {
 }
 
 
-function gameWonContainer() {
-    
+function gameWon() {
+    document.getElementById('game-won-container').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('d-none'); 
+    document.getElementById('mute-sound').classList.add('d-none'); 
+    document.getElementById('unmute-sound').classList.add('d-none'); 
+    document.getElementById('fullscreen-btn').classList.add('d-none'); 
+    document.getElementById('mobile-btns-bottom').classList.add('d-none'); 
 }
 
 
@@ -118,27 +138,30 @@ function closeControlsContainer() {
 
 
 function fullscreen() {
-    if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-    } else if (canvas.webkitRequestFullscreen) {
-        /* Safari */
-        canvas.webkitRequestFullscreen();
-    } else if (canvas.msRequestFullscreen) {
-        /* IE11 */
-        canvas.msRequestFullscreen();
+    let fullScreen = document.getElementById('fullscreen');
+    if (fullScreen.requestFullscreen) {
+        fullScreen.requestFullscreen();
+    } else if (fullScreen.webkitRequestFullscreen) {
+        fullScreen.webkitRequestFullscreen();
+    } else if (fullScreen.msRequestFullscreen) {
+        fullScreen.msRequestFullscreen();
     }
+    fullscreenStyle();
 }
 
 
-function deathScreen() {
-    document.getElementById('death-screen-container').classList.remove('d-none');
+    function fullscreenStyle() {
+        document.getElementById('canvas').classList.add('canvasFullscreen');
+    }
 
-    setTimeout(() => {
-        document.getElementById('restart-container').classList.remove('d-none');
-        
-    }, 3000);
-}
 
+// function exitFullscreen() {
+//     if (document.exitFullscreen) {
+//         document.exitFullscreen();
+//     } else if (document.webkitRequestFullscreen) {
+//         document.webkitRequestFullscreen();
+//     }
+// }
 
 
 function clearAllIntervals() {

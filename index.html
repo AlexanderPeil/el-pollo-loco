@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
@@ -32,9 +32,9 @@
 
 <body>
 
-    <h1>El pollo loco</h1>
+    <!-- <h1>El pollo loco</h1> -->
 
-    <div class="position-relative" id="fullscreen">
+    <div class="game-container" id="fullscreen">
         <canvas class="d-none" id="canvas" width="820" height="480"></canvas>
         <img id="mute-sound" class="sound-btn d-none" src="img/mute.png" onclick="muteSound()">
         <img id="unmute-sound" class="sound-btn d-none" src="img/unmute.png" onclick="unmuteSound()">
@@ -64,18 +64,22 @@
                 </div>
             </div>
         </div>
+        <div id="game-won-container" class="game-over-screen d-none">
+            <h1>Congratulations</h1>
+            <img class="game-won-img" src="./img/game-won.png" alt="#">
+            <p>You succesfully defeated the chicken invasion.</p>
+            <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
+        </div>
+        <div id="restart-container" class="game-over-screen d-none">
+            <img class="game-over-screen" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="">
+            <div class="game-over-btns">
+                <button class="buttons" onclick="restartGame()">RESTART GAME</button>
+                <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
+            </div>
+        </div>
     </div>
     <div id="death-screen-container" class="game-over-container d-none">
         <h2 class="death-screen">YOU DIED</h2>
-    </div>
-    <div id="game-won-container" class="game-over-container game-won-container d-none">
-        <h1>Congratulations</h1>
-        <p>You succesfully defeated the chicken invasion.</p>
-        <h2 onclick="mainMenu()">MAIN MENU</h2>
-    </div>
-    <div id="restart-container" class="restart-container game-over-container d-none">
-        <h2 onclick="restartGame()">RESTART GAME</h2>
-        <h2 onclick="mainMenu()">MAIN MENU</h2>
     </div>
 
     <div id="controls-container" class="d-none">
