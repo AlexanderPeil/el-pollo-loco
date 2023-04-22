@@ -10,11 +10,11 @@ class World {
     statusbarBottle = new Bottlebar();
     statusbarCoin = new Coinbar();
     enbosshealthBar = new EndbossHealthBar();
-
     intervalIds = [];
     collidesWithEndboss = false;
     lastThrow = false;
     alreadyThrow = false;
+
 
     // *2
     constructor(canvas, keyboard) {
@@ -34,7 +34,7 @@ class World {
 
 
     run() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithEndboss();
             this.checkTimerForThrow();
@@ -56,7 +56,7 @@ class World {
         if (this.keyboard.E && this.character.bottles > 0 && !this.lastThrow) {
             this.alreadyThrow = true;
             this.lastThrow = true;
-            let bottle = new ThrowableObject(this.character.x , this.character.y , this.character.otherDirection);
+            let bottle = new ThrowableObject(this.character.x , this.character.y + 50 , this.character.otherDirection);
             throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
@@ -134,8 +134,8 @@ class World {
 
 
     killEnemyWithBottle() {
-        this.hitEndboss();
-        this.killChickenWithBottle();
+            this.hitEndboss();
+            this.killChickenWithBottle();
     }
 
 
@@ -143,9 +143,17 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach(endboss => {
                 if (bottle.isColliding(endboss)) {
-                    this.collidesWithEndboss = true;
+                    this.collidesWithEndboss = true;                    
+                    // setInterval(() => {
+                    //     if (this.collidesWithEndboss = true) {
+                    //         this.collidesWithEndboss = false;
+                    //     }
+                    // }, 1000 / 60);
                     endboss.hurtEndboss();
                     this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
+                    // setTimeout(() => {
+                    //     this.collidesWithEndboss = false;
+                    // }, 50);
                 }
             });
         });

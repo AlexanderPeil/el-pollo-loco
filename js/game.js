@@ -22,7 +22,7 @@ function startGame() {
         showButtons();
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
-    }, 500); 
+    }, 500);
 }
 
 
@@ -39,21 +39,21 @@ function stopGame() {
 function showButtons() {
     document.getElementById('mute-sound').classList.remove('d-none');
     document.getElementById('fullscreen-btn').classList.remove('d-none');
+    document.getElementById('controls-ingame').classList.remove('d-none');
 }
 
 
 function deathScreen() {
-    document.getElementById('death-screen-container').classList.remove('d-none');
-
     setTimeout(() => {
-        document.getElementById('death-screen-container').classList.add('d-none');
-        document.getElementById('canvas').classList.add('d-none'); 
-        document.getElementById('mute-sound').classList.add('d-none'); 
-        document.getElementById('unmute-sound').classList.add('d-none'); 
-        document.getElementById('fullscreen-btn').classList.add('d-none'); 
-        document.getElementById('mobile-btns-bottom').classList.add('d-none'); 
-        document.getElementById('restart-container').classList.remove('d-none');        
-    }, 2000);
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('mute-sound').classList.add('d-none');
+        document.getElementById('unmute-sound').classList.add('d-none');
+        document.getElementById('fullscreen-btn').classList.add('d-none');
+        document.getElementById('mobile-btns-bottom').classList.add('d-none');
+        document.getElementById('restart-container').classList.remove('d-none');
+        document.getElementById('controls-ingame').classList.add('d-none');
+        document.getElementById('exit-fullscreen').classList.add('d-none');
+    }, 500);
 }
 
 
@@ -67,7 +67,6 @@ function hideElements() {
 
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
-    document.getElementById('death-screen-container').classList.add('d-none');
     clearAllIntervals();
     startGame();
 }
@@ -75,11 +74,14 @@ function restartGame() {
 
 function gameWon() {
     document.getElementById('game-won-container').classList.remove('d-none');
-    document.getElementById('canvas').classList.add('d-none'); 
-    document.getElementById('mute-sound').classList.add('d-none'); 
-    document.getElementById('unmute-sound').classList.add('d-none'); 
-    document.getElementById('fullscreen-btn').classList.add('d-none'); 
-    document.getElementById('mobile-btns-bottom').classList.add('d-none'); 
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('mute-sound').classList.add('d-none');
+    document.getElementById('unmute-sound').classList.add('d-none');
+    document.getElementById('fullscreen-btn').classList.add('d-none');
+    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+    document.getElementById('controls').classList.add('d-none');
+    document.getElementById('controls-ingame').classList.add('d-none');
+    document.getElementById('exit-fullscreen').classList.add('d-none');
 }
 
 
@@ -121,7 +123,7 @@ function unmuteSound() {
 
 function openControls() {
     document.getElementById('controls-container').classList.remove('d-none');
-    // document.getElementById('startscreen-container').classList.add('d-none');
+    document.getElementById('game-container').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
     document.getElementById('fullscreen').classList.add('d-none');
@@ -130,7 +132,7 @@ function openControls() {
 
 function closeControlsContainer() {
     document.getElementById('controls-container').classList.add('d-none');
-    // document.getElementById('startscreen-container').classList.remove('d-none');
+    document.getElementById('game-container').classList.remove('d-none');
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
     document.getElementById('fullscreen').classList.remove('d-none');
@@ -138,30 +140,49 @@ function closeControlsContainer() {
 
 
 function fullscreen() {
-    let fullScreen = document.getElementById('fullscreen');
-    if (fullScreen.requestFullscreen) {
-        fullScreen.requestFullscreen();
-    } else if (fullScreen.webkitRequestFullscreen) {
-        fullScreen.webkitRequestFullscreen();
-    } else if (fullScreen.msRequestFullscreen) {
-        fullScreen.msRequestFullscreen();
+    let gameContainer = document.getElementById('game-container');
+    enterFullscreen(gameContainer);
+}
+
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
     }
     fullscreenStyle();
 }
 
 
-    function fullscreenStyle() {
-        document.getElementById('canvas').classList.add('canvasFullscreen');
+function fullscreenStyle() {
+    document.getElementById('restart-container').classList.add('canvasFullscreen');
+    document.getElementById('game-won-container').classList.add('canvasFullscreen');
+    document.getElementById('canvas').classList.add('canvasFullscreen');
+    document.getElementById('fullscreen-btn').classList.add('d-none');
+    document.getElementById('exit-fullscreen').classList.remove('d-none');
+}
+
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitRequestFullscreen) {
+        document.webkitRequestFullscreen();
     }
+    removeFullscreenStyle();
+}
 
 
-// function exitFullscreen() {
-//     if (document.exitFullscreen) {
-//         document.exitFullscreen();
-//     } else if (document.webkitRequestFullscreen) {
-//         document.webkitRequestFullscreen();
-//     }
-// }
+function removeFullscreenStyle() {
+    document.getElementById('restart-container').classList.remove('canvasFullscreen');
+    document.getElementById('game-won-container').classList.remove('canvasFullscreen');
+    document.getElementById('canvas').classList.remove('canvasFullscreen');
+    document.getElementById('fullscreen-btn').classList.remove('d-none');
+    document.getElementById('exit-fullscreen').classList.add('d-none');
+}
 
 
 function clearAllIntervals() {
@@ -170,43 +191,43 @@ function clearAllIntervals() {
 
 
 window.addEventListener('keydown', (e) => {
-    if(e.keyCode == 39) {
+    if (e.keyCode == 39) {
         keyboard.RIGHT = true;
     }
 
-    if(e.keyCode == 37) {
+    if (e.keyCode == 37) {
         keyboard.LEFT = true;
     }
 
-    if(e.keyCode == 38) {
+    if (e.keyCode == 38) {
         keyboard.UP = true;
     }
 
-    if(e.keyCode == 40) {
+    if (e.keyCode == 40) {
         keyboard.DOWN = true;
     }
 
-    if(e.keyCode == 32) {
+    if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
 
-    if(e.keyCode == 65) {
+    if (e.keyCode == 65) {
         keyboard.A = true;
     }
 
-    if(e.keyCode == 83) {
+    if (e.keyCode == 83) {
         keyboard.S = true;
     }
 
-    if(e.keyCode == 68) {
+    if (e.keyCode == 68) {
         keyboard.D = true;
     }
 
-    if(e.keyCode == 87) {
+    if (e.keyCode == 87) {
         keyboard.W = true;
     }
 
-    if(e.keyCode == 69) {
+    if (e.keyCode == 69) {
         keyboard.E = true;
     }
 
@@ -215,43 +236,43 @@ window.addEventListener('keydown', (e) => {
 
 
 window.addEventListener('keyup', (e) => {
-    if(e.keyCode == 39) {
+    if (e.keyCode == 39) {
         keyboard.RIGHT = false;
     }
 
-    if(e.keyCode == 37) {
+    if (e.keyCode == 37) {
         keyboard.LEFT = false;
     }
 
-    if(e.keyCode == 38) {
+    if (e.keyCode == 38) {
         keyboard.UP = false;
     }
 
-    if(e.keyCode == 40) {
+    if (e.keyCode == 40) {
         keyboard.DOWN = false;
     }
 
-    if(e.keyCode == 32) {
+    if (e.keyCode == 32) {
         keyboard.SPACE = false;
     }
 
-    if(e.keyCode == 65) {
+    if (e.keyCode == 65) {
         keyboard.A = false;
     }
 
-    if(e.keyCode == 83) {
+    if (e.keyCode == 83) {
         keyboard.S = false;
     }
 
-    if(e.keyCode == 68) {
+    if (e.keyCode == 68) {
         keyboard.D = false;
     }
 
-    if(e.keyCode == 87) {
+    if (e.keyCode == 87) {
         keyboard.W = false;
     }
 
-    if(e.keyCode == 69) {
+    if (e.keyCode == 69) {
         keyboard.E = false;
     }
 

@@ -47,8 +47,7 @@ class Character extends MovableObject {
         './img/2_character_pepe/4_hurt/H-43.png'
     ];
 
-    intervalIds = [];
-    world; // So we can use the variable of the class world (i.e. keyboard)
+    world; 
 
 
     constructor() { 	// If somewhere new Character is called then this function will execute
@@ -63,7 +62,7 @@ class Character extends MovableObject {
 
     animate() {
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
-        setStoppableInterval(() => this.playCharacter(), 80);
+        setStoppableInterval(() => this.playCharacter(), 100);
     }
 
 
@@ -132,7 +131,7 @@ class Character extends MovableObject {
         stopGame();
 
         setTimeout(() => {
-            deathScreen()
+            deathScreen();
         }, 1000);
     }
 }

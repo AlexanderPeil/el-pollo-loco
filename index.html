@@ -34,18 +34,20 @@
 
     <!-- <h1>El pollo loco</h1> -->
 
-    <div class="game-container" id="fullscreen">
-        <canvas class="d-none" id="canvas" width="820" height="480"></canvas>
-        <img id="mute-sound" class="sound-btn d-none" src="img/mute.png" onclick="muteSound()">
-        <img id="unmute-sound" class="sound-btn d-none" src="img/unmute.png" onclick="unmuteSound()">
-        <img id="fullscreen-btn" class="d-none" src="img/fullscreen.png" onclick="fullscreen()">
+    <div class="" id="game-container">
         <div class="startscreen-container">
             <img id="start-screen" src="img/9_intro_outro_screens/start/startscreen_2.png">
             <img id="start-btn" src="img/start-btn.png" onclick="startGame()">
-            <img id="controls" src="img/controls.png" onclick="openControls()">
+            <img id="controls" class="controls" src="img/controls.png" onclick="openControls()">
         </div>
-
-        <div id="mobile-btns-bottom" class="d-none">
+        <canvas class="d-none" id="canvas" width="820" height="480"></canvas>
+        <img id="mute-sound" class="sound-btn d-none" src="img/mute.png" onclick="muteSound()">
+        <img id="unmute-sound" class="sound-btn d-none" src="img/unmute.png" onclick="unmuteSound()">
+        <img id="fullscreen-btn" class="fullscreen-btn d-none" src="img/fullscreen.png" onclick="fullscreen()">
+        <img id="exit-fullscreen" class="fullscreen-btn d-none" src="./img/exit-fullscreen.png" alt="#"
+            onclick="exitFullscreen(); removeFullscreenStyle()">
+        <img id="controls-ingame" class="controls d-none" src="img/controls.png" onclick="openControls()">
+        <div id="mobile-btns-bottom" class="hide">
             <div class="mobile-btns-flex">
                 <div class="mobile-btns">
                     <img id="btn-left" src="img/arrow-left.png">
@@ -65,21 +67,20 @@
             </div>
         </div>
         <div id="game-won-container" class="game-over-screen d-none">
-            <h1>Congratulations</h1>
-            <img class="game-won-img" src="./img/game-won.png" alt="#">
-            <p>You succesfully defeated the chicken invasion.</p>
+            <div>
+                <h1>Congratulations</h1>
+                <img class="game-won-img" src="./img/game-won.png" alt="#">
+                <p>You succesfully defeated the chicken invasion.</p>
+            </div>
             <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
         </div>
         <div id="restart-container" class="game-over-screen d-none">
-            <img class="game-over-screen" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="">
+            <img class="game-over-screen-img" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="">
             <div class="game-over-btns">
                 <button class="buttons" onclick="restartGame()">RESTART GAME</button>
                 <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
             </div>
         </div>
-    </div>
-    <div id="death-screen-container" class="game-over-container d-none">
-        <h2 class="death-screen">YOU DIED</h2>
     </div>
 
     <div id="controls-container" class="d-none">

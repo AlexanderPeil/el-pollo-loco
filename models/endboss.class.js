@@ -59,6 +59,7 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK)
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
@@ -69,7 +70,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        this.endbossFight = setInterval(() => {
+        this.endbossFight = setStoppableInterval(() => {
             this.startEndbossFight(i);
             i++;
             if (this.endbossReached()) {
@@ -88,9 +89,11 @@ class Endboss extends MovableObject {
             this.moveLeft();
         } else if (this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+            // this.speed + 5;
+            // console.log(this.speed);
+            console.log(world.level.endboss[0].energy)
         } else if (this.isDead()) {
             this.deathRoutine();
-            // gameWonContainer();
         }
     }
 

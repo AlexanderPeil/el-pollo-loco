@@ -51,24 +51,25 @@ class ThrowableObject extends MovableObject {
 
 
     animateBottle() {
-       this.splash = setInterval(() => {
+        setStoppableInterval(() => {
             if (this.y > 350 || world.collidesWithEndboss) {
                 this.playAnimation(this.IMAGES_SPLASH);
+                this.speed = 0;       
                 bottle_splash.play();
                 setTimeout(() => {
-                    this.collisionAnimation();
+                    bottle_splash.pause();
+                    // clearInterval(this.splash);
                 }, 1000);
             } else {
                 this.playAnimation(this.ROTATING_IMAGES);
             }
-        }, 1000 / 60);
+        }, 100);
         
-        setInterval(() => world.collidesWithEndboss = false, 1000 / 60);
+        setInterval(() => world.collidesWithEndboss = false, 100);
     }
 
 
-    collisionAnimation() {
-        this.x = 0;        
+    collisionAnimation() { 
         clearInterval(this.splash);
     }
 }
