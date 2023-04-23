@@ -14,6 +14,7 @@ class World {
     lastThrow = false;
     alreadyThrow = false;
     endbossIsInvulnerable = false;
+    characterIsInvulnerable = false;
 
 
     // *2
@@ -92,9 +93,13 @@ class World {
 
     checkCollisionsWithEndboss() {
         this.level.endboss.forEach((endboss) => {
-            if (this.character.isColliding(endboss) && !this.character.isInvulnerable()) {
+            if (this.character.isColliding(endboss) && !this.characterIsInvulnerable) {
                 this.character.hit();
                 this.statusbarHealth.setPercentage(this.character.energy);
+                this.characterIsInvulnerable = true;
+                setTimeout(() => {
+                    this.characterIsInvulnerable = false;
+                }, 750);
             }
         });
     }

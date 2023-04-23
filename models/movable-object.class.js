@@ -56,13 +56,13 @@ class MovableObject extends DrawableObject {
     }
 
 
-    isInvulnerable() {
-        if (this.timePassed < 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // isInvulnerable() {
+    //     if (this.timePassed < 1) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
     isHurt() {
