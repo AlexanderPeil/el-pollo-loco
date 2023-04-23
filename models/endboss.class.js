@@ -6,10 +6,10 @@ class Endboss extends MovableObject {
     speed = 15;
 
     offset = {
-        top: 0,
+        top: 200,
         bottom: 0,
-        left: 0,
-        right: 0
+        left: 60,
+        right: 60
     }
 
     IMAGES_ALERT = [

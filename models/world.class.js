@@ -10,10 +10,10 @@ class World {
     statusbarBottle = new Bottlebar();
     statusbarCoin = new Coinbar();
     enbosshealthBar = new EndbossHealthBar();
-    intervalIds = [];
     collidesWithEndboss = false;
     lastThrow = false;
     alreadyThrow = false;
+    endbossIsInvulnerable = false;
 
 
     // *2
@@ -142,18 +142,14 @@ class World {
     hitEndboss() {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach(endboss => {
-                if (bottle.isColliding(endboss)) {
-                    this.collidesWithEndboss = true;                    
-                    // setInterval(() => {
-                    //     if (this.collidesWithEndboss = true) {
-                    //         this.collidesWithEndboss = false;
-                    //     }
-                    // }, 1000 / 60);
+                if (bottle.isColliding(endboss) && !this.endbossIsInvulnerable) {
+                    this.collidesWithEndboss = true;                   
                     endboss.hurtEndboss();
+                    this.endbossIsInvulnerable = true;
+                    setTimeout(() => {
+                        this.endbossIsInvulnerable = false;
+                    }, 500);
                     this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
-                    // setTimeout(() => {
-                    //     this.collidesWithEndboss = false;
-                    // }, 50);
                 }
             });
         });
