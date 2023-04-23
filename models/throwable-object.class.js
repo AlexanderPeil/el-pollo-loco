@@ -69,7 +69,7 @@ class ThrowableObject extends MovableObject {
     }
 
 
-    collisionAnimation() { 
-        clearInterval(this.splash);
-    }
+    // collisionAnimation() { 
+    //     clearInterval(this.splash);
+    // }
 }

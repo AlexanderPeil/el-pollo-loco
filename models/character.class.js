@@ -50,8 +50,8 @@ class Character extends MovableObject {
     world; 
 
 
-    constructor() { 	// If somewhere new Character is called then this function will execute
-        super().loadImage(this.IMAGES_WALKING[0]); // super() = from over class movableObject
+    constructor() { 
+        super().loadImage(this.IMAGES_WALKING[0]); 
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -59,6 +59,7 @@ class Character extends MovableObject {
         this.checkApplyGravity();
         this.animate();
     }
+    
 
     animate() {
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);

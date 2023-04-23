@@ -56,7 +56,7 @@ class World {
         if (this.keyboard.E && this.character.bottles > 0 && !this.lastThrow) {
             this.alreadyThrow = true;
             this.lastThrow = true;
-            let bottle = new ThrowableObject(this.character.x , this.character.y + 50 , this.character.otherDirection);
+            let bottle = new ThrowableObject(this.character.x + 20 , this.character.y + 100, this.character.otherDirection);
             throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
