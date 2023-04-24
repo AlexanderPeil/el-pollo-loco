@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     width = 250;
     y = 60;
     speed = 15;
+    hadFirstContact = false;
 
     offset = {
         top: 90,
@@ -53,13 +54,11 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ]
 
-    hadFirstContact = false;
-    intervalIds = [];
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
-        this.loadImages(this.IMAGES_ATTACK)
+        this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
@@ -87,11 +86,10 @@ class Endboss extends MovableObject {
         } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
+        } else if (world.level.endboss[0].x - world.character.x < 300 && !this.endbossIsHurt()) {
+            this.playAnimation(this.IMAGES_ATTACK);
         } else if (this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-            // this.speed + 5;
-            // console.log(this.speed);
-            console.log(world.level.endboss[0].energy)
         } else if (this.isDead()) {
             this.deathRoutine();
         }

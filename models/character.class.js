@@ -1,11 +1,11 @@
 class Character extends MovableObject {
     height = 280;
     y = 155;
-    speed = 10;    
-    world; 
+    speed = 10;
+    world;
     lastMoveCharacter = 0;
 
-    
+
     offset = {
         top: 120,
         bottom: 20,
@@ -77,8 +77,8 @@ class Character extends MovableObject {
     ]
 
 
-    constructor() { 
-        super().loadImage(this.IMAGES_WALKING[0]); 
+    constructor() {
+        super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -88,7 +88,7 @@ class Character extends MovableObject {
         this.checkApplyGravity();
         this.animate();
     }
-    
+
 
     animate() {
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
@@ -98,7 +98,7 @@ class Character extends MovableObject {
 
     moveCharacter() {
         this.world.camera_x = -this.x + 100;
-        walking_sound.pause(); 
+        walking_sound.pause();
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x) {
             this.moveRight();
             this.otherDirection = false;
@@ -127,14 +127,15 @@ class Character extends MovableObject {
         } else if (this.isHurt()) {
             hurt_sound.play();
             this.playAnimation(this.IMAGES_HURT);
+            this.lastMoveCharacter = 0;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
-        } else if (this.characterIdle()) {
+            this.lastMoveCharacter = 0;
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.lastMoveCharacter = 0;
+        } else if (this.checkCharacterIdle()) {
             this.characterIdleAnimation();
-        } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A) {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
         }
     }
 
@@ -168,19 +169,19 @@ class Character extends MovableObject {
     }
 
 
-    characterIdle() {
-        let timepassed = new Date().getTime() - this.lastMoveCharacter;
-        timepassed = timepassed / 1000;
-        return timepassed > 2;
-    }
-
-
-    getCurrentTime() {
-        this.lastMoveCharacter = new Date().getTime();
+    checkCharacterIdle() {
+        return this.lastMoveCharacter < 50;
     }
 
 
     characterIdleAnimation() {
         this.playAnimation(this.IMAGES_IDLE_CHARACTER);
+        this.lastMoveCharacter++;
     }
+
+
+    //     charatcerSleeps() {
+    //         if (this.lastMoveCharacter > 5)
+    //         return; 
+    //     }
 }
