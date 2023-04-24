@@ -54,15 +54,6 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // isInvulnerable() {
-    //     if (this.timePassed < 1) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-
     isHurt() {
         this.timePassed = new Date().getTime() - this.lastHit; 
         this.timePassed = this.timePassed / 1000;                         
