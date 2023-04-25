@@ -73,7 +73,7 @@ class World {
             this.alreadyThrow = false;
             setTimeout(() => {
                 this.lastThrow = false;
-            }, 1000);
+            }, 2000);
         }
     }
 

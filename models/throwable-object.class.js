@@ -21,7 +21,7 @@ class ThrowableObject extends MovableObject {
 
 
     constructor(x, y, otherDirection) {
-        super().loadImage('./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
+        super().loadImage(this.ROTATING_IMAGES[0]);
         this.loadImages(this.ROTATING_IMAGES);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
@@ -51,19 +51,21 @@ class ThrowableObject extends MovableObject {
 
 
     animateBottle() {
-        setStoppableInterval(() => {
+        this.splash = setInterval(() => {
             if (this.y > 350 || world.collidesWithEndboss) {
-                this.playAnimation(this.IMAGES_SPLASH);
-                this.speed = 0;       
-                bottle_splash.play();
-                setTimeout(() => {
-                    bottle_splash.pause();
-                }, 1000);
+            this.playCollisionAnimation();
             } else {
-                this.playAnimation(this.ROTATING_IMAGES);
+              this.playAnimation(this.ROTATING_IMAGES);
             }
-        }, 100);
-        
-        setInterval(() => world.collidesWithEndboss = false, 50);
+          }, 1000 / 60);
+        setInterval(() => world.collidesWithEndboss = false, 100);
+    }
+
+
+    playCollisionAnimation() {     
+        bottle_splash.play();
+        this.playAnimation(this.IMAGES_SPLASH);
+        this.speed = 0;
+        clearInterval(this.splash);
     }
 }

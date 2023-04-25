@@ -115,6 +115,11 @@ class Endboss extends MovableObject {
 
         setTimeout(() => {
             gameWon();
+            snoreSound.volume = 0;
         }, 1000);
+
+        setTimeout(() => {
+            win_sound.volume = 0;
+        }, 3000);
     }
 }

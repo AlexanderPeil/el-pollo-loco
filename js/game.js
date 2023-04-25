@@ -14,6 +14,7 @@ deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
 snoreSound = new Audio('./audio/snore.mp3');
 
+
 // Time must be increased after I'm finished with the game
 function startGame() {
     setTimeout(() => {
@@ -21,6 +22,8 @@ function startGame() {
         hideElements();
         mobileButtons();
         showButtons();
+        snoreSound.volume = 1;
+        // win_sound.volume = 1;
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
     }, 500);
@@ -103,6 +106,7 @@ function muteSound() {
     coinSound.volume = 0;
     deadChicken.volume = 0;
     throwSound.volume = 0;
+    snoreSound.volume = 0;
 }
 
 
@@ -119,6 +123,7 @@ function unmuteSound() {
     coinSound.volume = 1;
     deadChicken.volume = 1;
     throwSound.volume = 1;
+    snoreSound.volume = 1;
 }
 
 

@@ -1,7 +1,7 @@
 class Character extends MovableObject {
     height = 280;
     y = 155;
-    speed = 10;
+    speed = 5;
     world;
     lastMoveCharacter = 0;
 
@@ -168,6 +168,7 @@ class Character extends MovableObject {
 
         setTimeout(() => {
             deathScreen();
+            snoreSound.volume = 0;
         }, 1000);
     }
 
