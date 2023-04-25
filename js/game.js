@@ -64,8 +64,9 @@ function deathScreen() {
 function hideElements() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
-    document.getElementById('start-btn').classList.add('d-none');
-    document.getElementById('controls').classList.add('d-none');
+    document.getElementById('button-container').classList.add('d-none');
+    // document.getElementById('start-btn').classList.add('d-none');
+    // document.getElementById('controls').classList.add('d-none');
 }
 
 
@@ -132,7 +133,6 @@ function openControls() {
     document.getElementById('game-container').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
-    document.getElementById('fullscreen').classList.add('d-none');
 }
 
 
@@ -141,7 +141,22 @@ function closeControlsContainer() {
     document.getElementById('game-container').classList.remove('d-none');
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
     document.getElementById('mobile-btns-bottom').classList.remove('d-none');
-    document.getElementById('fullscreen').classList.remove('d-none');
+}
+
+
+function openStoryContainer() {
+    document.getElementById('story-container').classList.remove('d-none');
+    document.getElementById('game-container').classList.add('d-none');
+    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+}
+
+
+function closeStoryContainer() {
+    document.getElementById('story-container').classList.add('d-none');
+    document.getElementById('game-container').classList.remove('d-none');
+    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
+    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
 }
 
 

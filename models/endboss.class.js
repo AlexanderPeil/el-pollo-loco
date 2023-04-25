@@ -69,7 +69,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        this.endbossFight = setStoppableInterval(() => {
+        setStoppableInterval(() => {
             this.startEndbossFight(i);
             i++;
             if (this.endbossReached()) {
@@ -86,7 +86,7 @@ class Endboss extends MovableObject {
         } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
-        } else if (world.level.endboss[0].x - world.character.x < 300 && !this.endbossIsHurt()) {
+        } else if (this.distanceCharacterEndboss() < 200 && !this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_ATTACK);
         } else if (this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_HURT);
@@ -106,15 +106,21 @@ class Endboss extends MovableObject {
     }
 
 
+    distanceCharacterEndboss() {
+        return this.x - world.character.x; 
+    }
+
+
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);        
         win_sound.play();
         setTimeout(() => {
-            clearInterval(this.endbossFight);
-        }, 200);
+            clearAllIntervals();
+            gameWon();
+        }, 500);
 
         setTimeout(() => {
-            gameWon();
+            // gameWon();
             snoreSound.volume = 0;
         }, 1000);
 
