@@ -12,6 +12,7 @@ bottleSound = new Audio('./audio/bottle.mp3');
 coinSound = new Audio('./audio/coin.mp3');
 deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
+snoreSound = new Audio('./audio/snore.mp3');
 
 // Time must be increased after I'm finished with the game
 function startGame() {

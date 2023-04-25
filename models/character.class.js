@@ -136,6 +136,9 @@ class Character extends MovableObject {
             this.lastMoveCharacter = 0;
         } else if (this.checkCharacterIdle()) {
             this.characterIdleAnimation();
+        } else {
+            this.playAnimation(this.IMAGES_LONG_IDLE_CHARACTER);
+            snoreSound.play();
         }
     }
 
@@ -177,11 +180,6 @@ class Character extends MovableObject {
     characterIdleAnimation() {
         this.playAnimation(this.IMAGES_IDLE_CHARACTER);
         this.lastMoveCharacter++;
+        snoreSound.pause();
     }
-
-
-    //     charatcerSleeps() {
-    //         if (this.lastMoveCharacter > 5)
-    //         return; 
-    //     }
 }
