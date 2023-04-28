@@ -1,5 +1,8 @@
 class ThrowableObject extends MovableObject {
 
+    characterDirection;
+
+
     ROTATING_IMAGES = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         './img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -15,9 +18,6 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ]
-
-    
-    characterDirection;
 
 
     constructor(x, y, otherDirection) {
@@ -44,9 +44,8 @@ class ThrowableObject extends MovableObject {
                 this.x += 15;
             }
         }, 25);
-        setTimeout(() =>{
-            clearInterval(this.throwInterval);
-        }, 1000)
+        
+        setTimeout(() => clearInterval(this.throwInterval) , 1000)
     }
 
 

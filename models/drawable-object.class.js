@@ -8,32 +8,31 @@ class DrawableObject {
     width = 100;
 
 
-        // loadImage('img/test.png);
-        loadImage(path) {
-            this.img = new Image(); // this.img = document.geteElementById('image) <img id="image" src>
-            this.img.src = path;    // chicken and chasracter classes have access to this loadImage function to load an image
-        }
+    loadImage(path) {
+        this.img = new Image();
+        this.img.src = path;
+    }
 
 
-        drawFrame(ctx) {
-            if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle || this instanceof Endboss) {
-                ctx.beginPath();
-                ctx.lineWidth = '5';
-                ctx.strokeStyle = 'transparent';
-                ctx.rect(this.x, this.y, this.width, this.height);
-                ctx.stroke();
-            }
-        }
-    
-    
-        draw(ctx) {
-            // try {
-                ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    // drawFrame(ctx) {
+    //     if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle || this instanceof Endboss) {
+    //         ctx.beginPath();
+    //         ctx.lineWidth = '5';
+    //         ctx.strokeStyle = 'transparent';
+    //         ctx.rect(this.x, this.y, this.width, this.height);
+    //         ctx.stroke();
+    //     }
+    // }
+
+
+    draw(ctx) {
+        // try {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         //     } catch (error) {
         //         console.warn('Error loading image', error);
         //         console.log('Could not load image', this.img.src);
         //     }
-        }
+    }
 
 
     /**
@@ -43,10 +42,10 @@ class DrawableObject {
     loadImages(arr) {   // arr for path of the images (string)
         arr.forEach((path) => {
 
-            let img = new Image();  // Variable for a new image
-            img.src = path;         // We load the image into the Image object
-            img.style = 'transform: scaleX(-1)';    
-            this.imageCache[path] = img;    // We update the imageCache (with the key "path")
+            let img = new Image();  
+            img.src = path;         
+            img.style = 'transform: scaleX(-1)';
+            this.imageCache[path] = img;   
         });
     }
 }

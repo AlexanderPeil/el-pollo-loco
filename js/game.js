@@ -27,7 +27,7 @@ function startGame() {
         snoreSound.volume = 1;
         game_music.currentTime = 0;
         game_music.play();
-        // win_sound.volume = 1;
+        game_music.volume = 0.5;
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
     }, 500);
@@ -136,7 +136,7 @@ function unmuteSound() {
     deadChicken.volume = 1;
     throwSound.volume = 1;
     snoreSound.volume = 1;
-    game_music.volume = 1;
+    game_music.volume = 0.5;
 }
 
 

@@ -56,7 +56,7 @@ class MovableObject extends DrawableObject {
 
     isHurt() {
         this.timePassed = new Date().getTime() - this.lastHit; 
-        this.timePassed = this.timePassed / 1000;                         
+        this.timePassed = this.timePassed / 1000;                  
         return this.timePassed < 1;    
     }
 
@@ -98,10 +98,8 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // plays an animation using a sequence of images. The function takes an array of image paths as input and cycles through the array to display each image in turn.
-    // The function uses the modulo operator (%) to calculate the index of the current image to display.
     playAnimation(images) {
-        let i = this.currenImage % images.length; // let i = 0 % 6 (0 / 6 = 0 Rest 6 usw bis 6 / 6 = 1 Rest 0)
+        let i = this.currenImage % images.length; 
         let path = images[i];
         this.img = this.imageCache[path];
         this.currenImage++;
@@ -112,9 +110,33 @@ class MovableObject extends DrawableObject {
         this.x += this.speed;
     }
 
-    // Animation to some objects like chickens or clouds. 
-    // It decreases x (-=) with the speed variable and it refreshes 60/sec = 60 fps.
+
     moveLeft() {
         this.x -= this.speed;
+
+    }
+
+
+    animateChicken() {
+        this.move = setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
+
+        this.walking = setInterval(() => {
+            if (this.isDead()) {
+                this.loadImage(this.IMAGE_DEAD);
+                this.deadChicken()
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 150);
+    }
+
+
+    deadChicken() {
+        setTimeout(() => {
+            clearInterval(this.move);
+            clearInterval(this.walking);
+        }, 50);
     }
 }

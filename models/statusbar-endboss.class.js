@@ -1,7 +1,7 @@
-class EndbossHealthBar extends Statusbar {
-    
+class EndbossHealthBar extends Statusbar {    
     x = 560;
     y = 0;
+    
 
     IMAGES = [
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',

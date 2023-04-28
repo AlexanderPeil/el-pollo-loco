@@ -6,7 +6,8 @@ class Level {
     coins;
     backgroundObjects;
     level_end_x = 3500;
-    // The constructor will start first 
+
+    
     constructor(enemies, endboss, clouds, bottles, coins, backgroundObjects) {
         this.enemies = enemies;
         this.endboss = endboss;

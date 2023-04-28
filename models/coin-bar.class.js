@@ -1,6 +1,6 @@
 class Coinbar extends Statusbar {
-
     y = 120;
+
 
     IMAGES = [
         './img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',
@@ -10,6 +10,7 @@ class Coinbar extends Statusbar {
         './img/7_statusbars/1_statusbar/1_statusbar_coin/blue/80.png',
         './img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png'
     ];
+    
 
     constructor() {
         super().loadImages(this.IMAGES);

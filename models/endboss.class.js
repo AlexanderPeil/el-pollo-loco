@@ -13,6 +13,7 @@ class Endboss extends MovableObject {
         right: 40
     }
 
+
     IMAGES_ALERT = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
         './img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -120,12 +121,7 @@ class Endboss extends MovableObject {
             gameWon();
         }, 500);
 
-        setTimeout(() => {
-            snoreSound.volume = 0;
-        }, 1000);
-
-        setTimeout(() => {
-            win_sound.volume = 0;
-        }, 3000);
+        setTimeout(() => snoreSound.volume = 0 , 1000);
+        setTimeout(() => win_sound.volume = 0 , 3000);
     }
 }

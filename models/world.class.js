@@ -1,7 +1,7 @@
 class World {
     character = new Character();
     level = level1;
-    canvas; // *1 We need this canvas in this class in the function draw() for clearRect 
+    canvas; 
     ctx;
     keyboard;
     camera_x = 0;
@@ -17,20 +17,19 @@ class World {
     characterIsInvulnerable = false;
 
 
-    // *2
+
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d'); // *2 We get this canvas from the game.js with the params in the constructor
-        this.canvas = canvas; // *1 This canvas is the canvas variable above the constructor. 
+        this.ctx = canvas.getContext('2d'); 
+        this.canvas = canvas; 
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
         this.run();
     }
 
-    // We "give" the variable world to the class character. So you can use 
-    // the variable keyboard in the class character
+
     setWorld() {
-        this.character.world = this;    // So we "give" the variable wold to the character class
+        this.character.world = this;   
     }
 
 
@@ -47,9 +46,7 @@ class World {
 
 
     checkTimerForThrow() {
-        setStoppableInterval(() => {
-            this.checkThrowObjects();
-        }, 1000 / 60);
+        setStoppableInterval(() => this.checkThrowObjects() , 1000 / 60);
     }
 
 
@@ -57,7 +54,7 @@ class World {
         if (this.keyboard.E && this.character.bottles > 0 && !this.lastThrow) {
             this.alreadyThrow = true;
             this.lastThrow = true;
-            let bottle = new ThrowableObject(this.character.x + 20 , this.character.y + 100, this.character.otherDirection);
+            let bottle = new ThrowableObject(this.character.x + 20, this.character.y + 100, this.character.otherDirection);
             throwSound.play();
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
@@ -91,6 +88,7 @@ class World {
         });
     }
 
+
     checkCollisionsWithEndboss() {
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss) && !this.characterIsInvulnerable) {
@@ -109,15 +107,14 @@ class World {
         this.character.speedY = 30;
         deadChicken.play();
         enemy.chickenKilled();
-        
 
         setTimeout(() => {
-            this.deleteEnemy(enemy);
+        this.deleteEnemy(enemy);
         }, 500);
     }
 
 
-    killChickenWithBottle() {   
+    killChickenWithBottle() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach(enemy => {
                 if (bottle.isColliding(enemy)) {
@@ -139,8 +136,8 @@ class World {
 
 
     killEnemyWithBottle() {
-            this.hitEndboss();
-            this.killChickenWithBottle();
+        this.hitEndboss();
+        this.killChickenWithBottle();
     }
 
 
@@ -148,7 +145,7 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach(endboss => {
                 if (bottle.isColliding(endboss) && !this.endbossIsInvulnerable) {
-                    this.collidesWithEndboss = true;                   
+                    this.collidesWithEndboss = true;
                     endboss.hurtEndboss();
                     this.endbossIsInvulnerable = true;
                     setTimeout(() => {
@@ -163,7 +160,9 @@ class World {
 
     deleteEnemy(enemy) {
         let i = this.level.enemies.indexOf(enemy);
-        this.level.enemies.splice(i, 1);
+        if (i > -1) {
+            this.level.enemies.splice(i, 1);
+        }
     }
 
 
@@ -204,21 +203,15 @@ class World {
 
 
     draw() {
-        // *1 clearRect clears the canvas too draw the next image. 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.translate(this.camera_x, 0);// Pushes draw the ctx to the left side
-        // Then we draw our elements in the ctx
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-        // --------- Space for fixed objects -----
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
         this.addToMap(this.enbosshealthBar);
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
@@ -227,11 +220,11 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
 
-        this.ctx.translate(-this.camera_x, 0); // Finally we push the ctx back to the right
+        this.ctx.translate(-this.camera_x, 0); 
 
         let self = this;
-        requestAnimationFrame(function () { // The function will start async and draw will repeat as
-            self.draw();                // many fps as the vido card its quality is good.
+        requestAnimationFrame(function () { 
+            self.draw();             
         });
     }
 
@@ -256,10 +249,8 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
 
-
-        // To restore otherDirection (false)
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
