@@ -113,6 +113,7 @@ class Endboss extends MovableObject {
 
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);        
+        game_music.pause();
         win_sound.play();
         setTimeout(() => {
             clearAllIntervals();
@@ -120,7 +121,6 @@ class Endboss extends MovableObject {
         }, 500);
 
         setTimeout(() => {
-            // gameWon();
             snoreSound.volume = 0;
         }, 1000);
 

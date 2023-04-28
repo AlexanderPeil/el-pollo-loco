@@ -38,18 +38,16 @@
     <div id="mobile" class="d-none">
         <p>Please rotate your phone</p>
     </div>
-    <div class="" id="game-container">
+    <div class="mobile-height" id="game-container">
         <div id="button-container">
             <button id="start-btn" class="start-screen-btns" onclick="startGame()">Start</button>
             <button id="controls" class="start-screen-btns" onclick="openControls()">Controls</button>
             <button id="story" class="start-screen-btns" onclick="openStoryContainer()">Story</button>
         </div>
-        <div class="startscreen-container">
-            <img id="start-screen" src="img/9_intro_outro_screens/start/startscreen_2.png">
-            <!-- <img id="start-btn" src="img/start-btn.png" onclick="startGame()"> -->
-            <!-- <img id="controls" class="controls" src="img/controls.png" onclick="openControls()"> -->
+        <div class="startscreen-container mobile-height" id="startscreen-container">
+            <img class="mobile-height" id="start-screen" src="img/9_intro_outro_screens/start/startscreen_2.png">
         </div>
-        <canvas class="d-none" id="canvas" width="820" height="480"></canvas>
+        <canvas class="mobile-height d-none" id="canvas" width="820" height="480"></canvas>
         <img id="mute-sound" class="sound-btn ingame-btns d-none" src="img/mute.png" onclick="muteSound()">
         <img id="unmute-sound" class="sound-btn ingame-btns d-none" src="img/unmute.png" onclick="unmuteSound()">
         <img id="fullscreen-btn" class="fullscreen-btn ingame-btns d-none" src="img/fullscreen.png"
@@ -57,7 +55,7 @@
         <img id="exit-fullscreen" class="fullscreen-btn ingame-btns d-none" src="./img/exit-fullscreen.png" alt="#"
             onclick="exitFullscreen(); removeFullscreenStyle()">
         <img id="controls-ingame" class="controls ingame-btns d-none" src="img/controls.png" onclick="openControls()">
-        <div id="mobile-btns-bottom" class="hide">
+        <div id="mobile-btns-bottom" class="hide d-none">
             <div class="mobile-btns-flex">
                 <div class="mobile-btns">
                     <img id="btn-left" src="img/arrow-left.png">
@@ -76,18 +74,26 @@
                 </div>
             </div>
         </div>
-        <div id="game-won-container" class="game-over-screen d-none">
+        <img class="game-over-screen-img d-none" id="game-over-screen-img" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="#">
+        <div id="game-won-container" class="game-over-screen mobile-height d-none">
             <div>
-                <h1>Congratulations</h1>
-                <img class="game-over-screen-img" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="#">
-                <p>You succesfully repelled the chicken invasion. The giant rooster was also defeated and all the villager can go on with their normal life before the invasion.
-                    Pepe is teh most popular hero his village and his friends and neighbors start to build a hughe statue for him.
+                <p>After a long fight, Pepe finally reached the source of the evil controlling the chickens. It
+                    was a massive rooster, towering above him with glowing eyes and razor-sharp talons.
+        
+                    Pepe summoned all of his strength and launched himself at the rooster. The battle was long and grueling, but
+                    Pepe persevered. Finally, with one final blow, the rooster was defeated, and the chickens were freed from its
+                    control.
+        
+                    The village rejoiced as Pepe returned, exhausted but victorious. The people hailed him as a hero, and Pepe
+                    knew that he had done what he was born to do - protect his people from all threats, no matter how bizarre
+                    they may be.
+                </p>
                 </p>
             </div>
             <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
         </div>
-        <div id="restart-container" class="game-over-screen d-none">
-            <img class="game-over-screen-img" src="./img/9_intro_outro_screens/game_over/oh no you lost!.png" alt="#">
+        <div id="restart-container" class="game-over-screen mobile-height d-none">
+            <img class="game-over-screen-img" id="game-over-screen-img" src="./img/9_intro_outro_screens/game_over/oh no you lost!.png" alt="#">
             <div class="game-over-btns">
                 <button class="buttons" onclick="restartGame()">RESTART GAME</button>
                 <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
@@ -95,7 +101,7 @@
         </div>
     </div>
 
-    <div id="controls-container" class="controls-story-container d-none">
+    <div id="controls-container" class="controls-story-container mobile-height d-none">
         <img id="controls-container-back" class="controls-story-container-back" src="img/arrow-left.png"
             onclick="closeControlsContainer()">
         <h2 class="game-controls">Game Controls</h2>
@@ -115,12 +121,12 @@
             </div>
         </div>
     </div>
-    <div id="story-container" class="controls-story-container d-none">
+    <div id="story-container" class="controls-story-container mobile-height d-none">
         <img id="story-container-back" class="controls-story-container-back" src="img/arrow-left.png"
             onclick="closeStoryContainer()">
         <p>
             Pepe was a bored mexican farmer. Nothing special ever happened in his village. But one day, a
-            strange phenomenon occurred. Chickens, hundreds of them, began to descend upon the village from all sides.
+            strange phenomenon occurred. Chickens began to descend upon the village from all sides.
             Pepe knew that this was no ordinary chicken invasion and that he needed to act fast.
 
             Pepe quickly assessed the situation and realized that the chickens were being controlled by a powerful and
@@ -128,18 +134,6 @@
 
             As he battled his way through the endless hordes of chickens, Pepe could feel his strength waning. The
             chickens were relentless, and he knew that he would need to find a way to turn the tide of battle.
-
-            After many long hours of fighting, Pepe finally reached the source of the evil controlling the chickens. It
-            was a massive rooster, towering above him with glowing eyes and razor-sharp talons.
-
-            Pepe summoned all of his strength and launched himself at the rooster. The battle was long and grueling, but
-            Pepe persevered. Finally, with one final blow, the rooster was defeated, and the chickens were freed from its
-            control.
-
-            The village rejoiced as Pepe returned, exhausted but victorious. The people hailed him as a hero, and Pepe
-            knew that he had done what he was born to do - protect his people from all threats, no matter how bizarre
-            they may be.
-        </p>
     </div>
     </div>
 

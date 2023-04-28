@@ -66,13 +66,13 @@ function deathScreen() {
 
 
 function hideElements() {
-    document.getElementById('start-screen').classList.add('d-none');
-    document.getElementById('canvas').classList.remove('d-none');
-    document.getElementById('button-container').classList.add('d-none');
-    // document.getElementById('start-btn').classList.add('d-none');
-    // document.getElementById('controls').classList.add('d-none');
-}
-
+      document.getElementById('start-screen').classList.add('d-none');
+      document.getElementById('canvas').classList.remove('d-none');
+      document.getElementById('button-container').classList.add('d-none');
+      document.getElementById('startscreen-container').classList.add('mobile-height');
+      document.getElementById('startscreen-container').classList.remove('mobile-height');
+  }
+  
 
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
@@ -83,7 +83,7 @@ function restartGame() {
 
 
 function gameWon() {
-    document.getElementById('game-won-container').classList.remove('d-none');
+    document.getElementById('game-over-screen-img').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('mute-sound').classList.add('d-none');
     document.getElementById('unmute-sound').classList.add('d-none');
@@ -92,6 +92,11 @@ function gameWon() {
     document.getElementById('controls').classList.add('d-none');
     document.getElementById('controls-ingame').classList.add('d-none');
     document.getElementById('exit-fullscreen').classList.add('d-none');
+
+    setTimeout(() => {
+        document.getElementById('game-over-screen-img').classList.add('d-none');
+        document.getElementById('game-won-container').classList.remove('d-none');
+    }, 2000);
 }
 
 
@@ -113,6 +118,7 @@ function muteSound() {
     deadChicken.volume = 0;
     throwSound.volume = 0;
     snoreSound.volume = 0;
+    game_music.volume = 0;
 }
 
 
@@ -130,6 +136,7 @@ function unmuteSound() {
     deadChicken.volume = 1;
     throwSound.volume = 1;
     snoreSound.volume = 1;
+    game_music.volume = 1;
 }
 
 
@@ -350,4 +357,6 @@ function mobileButtons() {
         e.preventDefault();
         keyboard.E = false;
     });
+
+    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
 }
