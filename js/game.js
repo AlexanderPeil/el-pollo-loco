@@ -13,6 +13,8 @@ coinSound = new Audio('./audio/coin.mp3');
 deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
 snoreSound = new Audio('./audio/snore.mp3');
+game_music = new Audio('./audio/game-music.mp3');
+game_music.loop = true;
 
 
 // Time must be increased after I'm finished with the game
@@ -23,6 +25,8 @@ function startGame() {
         mobileButtons();
         showButtons();
         snoreSound.volume = 1;
+        game_music.currentTime = 0;
+        game_music.play();
         // win_sound.volume = 1;
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
@@ -72,6 +76,7 @@ function hideElements() {
 
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
+    death_sound.pause();
     clearAllIntervals();
     startGame();
 }

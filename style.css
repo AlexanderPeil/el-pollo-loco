@@ -38,13 +38,13 @@ h1 {
 .start-screen-btns {
     text-align: center;
     font-size: 25px;
-    /* width: 120px; */
     height: 45px;
     cursor: pointer;
     color: white;
     background-color: #ff9600;
     letter-spacing: 1.1px;
     border-radius: 10px;
+    border: 1px solid white;
 }
 
 .start-screen-btns:hover {

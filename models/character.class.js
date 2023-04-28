@@ -163,7 +163,9 @@ class Character extends MovableObject {
 
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);
+        death_sound.currentTime = 0;
         death_sound.play();
+        game_music.pause();
         stopGame();
 
         setTimeout(() => {
