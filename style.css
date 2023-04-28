@@ -361,13 +361,26 @@ h1 {
     }
 }
 
-@media only screen and (max-height: 480px) {
+@media only screen and (max-height: 520px) {
     .mobile-height {
         height: 100% !important;
     }
 
     #mobile-btns-bottom {
         opacity: 1;
+    }
+
+    .keyboard-btn {
+        font-size: 25px;
+    }
+
+    .keyboard-btn img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .control-explanation p {
+        font-size: 25px;
     }
 }
 
