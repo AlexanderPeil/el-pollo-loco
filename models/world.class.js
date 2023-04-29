@@ -144,17 +144,27 @@ class World {
     hitEndboss() {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach(endboss => {
-                if (bottle.isColliding(endboss) && !this.endbossIsInvulnerable) {
-                    this.collidesWithEndboss = true;
-                    endboss.hurtEndboss();
-                    this.endbossIsInvulnerable = true;
-                    setTimeout(() => {
-                        this.endbossIsInvulnerable = false;
-                    }, 500);
-                    this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
+                if (this.bottleCollidingEndboss(endboss, bottle)) {
+                        this.endbossIsHurt(endboss);
                 }
             });
         });
+    }
+
+
+    bottleCollidingEndboss(endboss, bottle) {
+        return bottle.isColliding(endboss) && !this.endbossIsInvulnerable;
+    }
+
+
+    endbossIsHurt(endboss) {
+        this.collidesWithEndboss = true;
+        endboss.hurtEndboss();
+        this.endbossIsInvulnerable = true;
+        setTimeout(() => {
+            this.endbossIsInvulnerable = false;
+        }, 500);
+        this.enbosshealthBar.setPercentage(world.level.endboss[0].energy);
     }
 
 
@@ -205,12 +215,15 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
+
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
         this.addToMap(this.enbosshealthBar);
+
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
@@ -244,16 +257,12 @@ class World {
      * @param {object} mo - A param for a movable object (like the character)
      */
     addToMap(mo) {
-        if (mo.otherDirection) {
-            this.flipImage(mo);
-        }
+        if (mo.otherDirection) this.flipImage(mo);        
 
         mo.draw(this.ctx);
         // mo.drawFrame(this.ctx);
 
-        if (mo.otherDirection) {
-            this.flipImageBack(mo);
-        }
+        if (mo.otherDirection) this.flipImageBack(mo);        
     }
 
 

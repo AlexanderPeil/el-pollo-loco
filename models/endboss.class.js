@@ -84,15 +84,16 @@ class Endboss extends MovableObject {
     startEndbossFight(i) {
         if (i < 15) {
             this.playAnimation(this.IMAGES_ALERT);
-        } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
-            this.playAnimation(this.IMAGES_WALKING);
-            this.moveLeft();
-        } else if (this.distanceCharacterEndboss() < 200 && !this.endbossIsHurt()) {
+        } else if (this.distanceCharacterEndboss() < 400 && !this.endbossIsHurt()) {
             this.playAnimation(this.IMAGES_ATTACK);
         } else if (this.endbossIsHurt()) {
+            this.speed + 5;
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isDead()) {
             this.deathRoutine();
+        } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.moveLeft();
         }
     }
 
@@ -108,12 +109,12 @@ class Endboss extends MovableObject {
 
 
     distanceCharacterEndboss() {
-        return this.x - world.character.x; 
+        return this.x - world.character.x;
     }
 
 
     deathRoutine() {
-        this.playAnimation(this.IMAGES_DEAD);        
+        this.playAnimation(this.IMAGES_DEAD);
         game_music.pause();
         win_sound.play();
         setTimeout(() => {
@@ -121,7 +122,7 @@ class Endboss extends MovableObject {
             gameWon();
         }, 500);
 
-        setTimeout(() => snoreSound.volume = 0 , 1000);
-        setTimeout(() => win_sound.volume = 0 , 3000);
+        setTimeout(() => snoreSound.volume = 0, 1000);
+        setTimeout(() => win_sound.volume = 0, 3000);
     }
 }

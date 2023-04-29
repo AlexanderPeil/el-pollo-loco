@@ -18,6 +18,10 @@ game_music.loop = true;
 
 
 // Time must be increased after I'm finished with the game
+/**
+ * Starts the game by initializing the level, hiding elements, setting up mobile buttons, 
+ * showing game buttons, playing background music, and creating a new world object.
+ */
 function startGame() {
     setTimeout(() => {
         initLevel();
@@ -34,16 +38,28 @@ function startGame() {
 }
 
 
+/**
+ * Sets up a stoppable interval that calls a function repeatedly with a specified time interval.
+ * @param {Function} fn - The function to be called repeatedly. 
+ * @param {number} time - The time interval in milliseconds. 
+ */
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
 }
 
 
+/**
+ * Stops all stoppable intervals that were previously set up using the setStoppableInterval function.
+ */
 function stopGame() {
     intervalIds.forEach(clearInterval);
 }
 
+
+/**
+ * Shows game buttons by removing the 'd-none' class from their respective HTML elements.
+ */
 function showButtons() {
     document.getElementById('mute-sound').classList.remove('d-none');
     document.getElementById('fullscreen-btn').classList.remove('d-none');
@@ -51,6 +67,9 @@ function showButtons() {
 }
 
 
+/**
+ * Shows the death screen by adding/removing specific classes to/from HTML elements after a delay of 500ms.
+ */
 function deathScreen() {
     setTimeout(() => {
         document.getElementById('canvas').classList.add('d-none');
@@ -65,6 +84,9 @@ function deathScreen() {
 }
 
 
+/**
+ * Hides elements of the start screen and shows the canvas
+ */
 function hideElements() {
       document.getElementById('start-screen').classList.add('d-none');
       document.getElementById('canvas').classList.remove('d-none');
@@ -74,6 +96,9 @@ function hideElements() {
   }
   
 
+/**
+ * Restarts the game by hiding the death screen and calling the startGame function to initialize the game.
+ */  
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
     death_sound.pause();
@@ -82,6 +107,9 @@ function restartGame() {
 }
 
 
+/**
+ * Displays the "game won" screen and hides various elements of the game interface.
+ */
 function gameWon() {
     document.getElementById('game-over-screen-img').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
@@ -100,11 +128,18 @@ function gameWon() {
 }
 
 
+/**
+ * Reloads the current page, effectively returning the user to the main menu and resetting the game.
+ */
 function mainMenu() {
     window.location.reload();
 }
 
 
+/**
+ * Mutes all sounds in the game by setting their volume to 0.
+ * Also shows the "unmute sound" button.
+ */
 function muteSound() {
     document.getElementById('unmute-sound').classList.remove('d-none');
     walking_sound.volume = 0;
@@ -122,6 +157,10 @@ function muteSound() {
 }
 
 
+/**
+ * The unmuteSound() function in the code is used to unmute the game sounds.
+ * Also it shows the "mute" button.
+ */
 function unmuteSound() {
     document.getElementById('unmute-sound').classList.add('d-none');
     document.getElementById('mute-sound').classList.remove('d-none');
@@ -140,6 +179,9 @@ function unmuteSound() {
 }
 
 
+/**
+ * Opens the controls menu, hiding the game container and mobile buttons.
+ */
 function openControls() {
     document.getElementById('controls-container').classList.remove('d-none');
     document.getElementById('game-container').classList.add('d-none');
@@ -148,6 +190,9 @@ function openControls() {
 }
 
 
+/**
+ * Closes the controls menu, shows the mobile buttons.
+ */
 function closeControlsContainer() {
     document.getElementById('controls-container').classList.add('d-none');
     document.getElementById('game-container').classList.remove('d-none');
@@ -156,6 +201,9 @@ function closeControlsContainer() {
 }
 
 
+/**
+ * Shows the story container and hides the game container and mobile buttons at the bottom.
+ */
 function openStoryContainer() {
     document.getElementById('story-container').classList.remove('d-none');
     document.getElementById('game-container').classList.add('d-none');
@@ -164,6 +212,9 @@ function openStoryContainer() {
 }
 
 
+/**
+ * Closes the story container and shows the game container.
+ */
 function closeStoryContainer() {
     document.getElementById('story-container').classList.add('d-none');
     document.getElementById('game-container').classList.remove('d-none');
@@ -172,12 +223,19 @@ function closeStoryContainer() {
 }
 
 
+/**
+ * Toggles fullscreen mode for the game container element.
+ */
 function fullscreen() {
     let gameContainer = document.getElementById('game-container');
     enterFullscreen(gameContainer);
 }
 
 
+/**
+ * Requests fullscreen mode for a given element.
+ * @param {HTMLElement} element - The element to enter fullscreen mode. 
+ */
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -190,6 +248,9 @@ function enterFullscreen(element) {
 }
 
 
+/**
+ * Applies CSS styling to elements when the game enters fullscreen mode.
+ */
 function fullscreenStyle() {
     document.getElementById('restart-container').classList.add('canvasFullscreen');
     document.getElementById('game-won-container').classList.add('canvasFullscreen');
@@ -199,6 +260,9 @@ function fullscreenStyle() {
 }
 
 
+/**
+ * Exits fullscreen mode and removes fullscreen styles from elements.
+ */
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -209,6 +273,10 @@ function exitFullscreen() {
 }
 
 
+/**
+ * Removes the fullscreen styles from various elements on the page.
+ * Restores the fullscreen button and hides the exit fullscreen button.
+ */
 function removeFullscreenStyle() {
     document.getElementById('restart-container').classList.remove('canvasFullscreen');
     document.getElementById('game-won-container').classList.remove('canvasFullscreen');
@@ -218,11 +286,17 @@ function removeFullscreenStyle() {
 }
 
 
+/**
+ * Clears all JavaScript intervals with IDs between 1 and 9999.
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++)  window.clearInterval(i);
 }
 
 
+/**
+ * 
+ */
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -263,11 +337,12 @@ window.addEventListener('keydown', (e) => {
     if (e.keyCode == 69) {
         keyboard.E = true;
     }
-
-    // console.log(e);
 });
 
 
+/**
+ * 
+ */
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
@@ -308,9 +383,8 @@ window.addEventListener('keyup', (e) => {
     if (e.keyCode == 69) {
         keyboard.E = false;
     }
-
-    // console.log(e);
 });
+
 
 
 function mobileButtons() {
