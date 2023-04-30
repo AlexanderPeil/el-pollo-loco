@@ -11,6 +11,7 @@ let level1;
         );
     }
 
+
     function createEnemies() {
         return [
             new Chicken(),
@@ -28,11 +29,13 @@ let level1;
         ]
     }
 
+    
     function createEndboss() {
         return [
             new Endboss()
         ]
     }
+
 
     function createClouds() {
         return [
@@ -47,6 +50,7 @@ let level1;
         ]
     }
 
+
     function createBottles() {
         return [   
             new Bottle(),
@@ -60,6 +64,7 @@ let level1;
         ]
     }
 
+
     function createCoins() {
         return [
             new Coin(),
@@ -70,6 +75,7 @@ let level1;
         ]
     }
 
+    
     function createBackground() {
         return [
             new BackgroundObject('./img/5_background/layers/air.png', -719),

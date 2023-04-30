@@ -68,6 +68,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * The animate() method sets an interval that repeatedly calls the startEndbossFight() method. 
+     * Checks if endbossReached() is true and sets i to 0 and hadFirstContact to true.
+     */
     animate() {
         let i = 0;
         setStoppableInterval(() => {
@@ -81,6 +85,12 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * Starts the endboss fight animation based on the current frame.
+     * Cheks the dnboss frame, the distance to the character, wheter the endboss is hurt or is dead and shows the associated animation.
+     * Otherwise plays teh walking animation.
+     * @param {*} i - The current frame of the animation.
+     */
     startEndbossFight(i) {
         if (i < 15) {
             this.playAnimation(this.IMAGES_ALERT);
@@ -98,21 +108,37 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * Check if the endboss fight begins, which occurs when the character reaches a certain distance to the endboss.
+     * @returns {boolean} True if the character is close enough to the endboss.
+     */
     endbossFightBegins() {
         return world.character.x > world.level.endboss[0].x - 1000;
     }
 
 
+    /**
+     * Determines if the character has reached the endboss and has not had the first contact with the boss yet.
+     * @returns {boolean} True if character reached the end boss and has not had the first contact.
+     */
     endbossReached() {
         return world.character.x > 3800 && !hadFirstContact;
     }
 
 
+    /**
+     * Calculates the distance between the character and the end boss.
+     * @returns {number} The distance between the character and the end boss.
+     */
     distanceCharacterEndboss() {
         return this.x - world.character.x;
     }
 
 
+    /**
+     * Plays the death animation, pauses the game music, plays the win sound effect, and stops the game.
+     * After a delay, the gameWon() function is called, and the snore sound effect and win sound effect are muted.
+     */
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);
         game_music.pause();

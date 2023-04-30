@@ -96,6 +96,12 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Sets camera position relative to character.
+     * Plays walking sound when character moves.
+     * Checks if the character can move or jump.
+     * If it's possible then execute the function for moving or jumping.
+     */
     moveCharacter() {
         this.world.camera_x = -this.x + 100;
         walking_sound.pause();
@@ -108,11 +114,19 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Checks if the character can move right based on the keyboard input and the end of the level position.
+     * @returns {boolean} true if the character can move right, false otherwise. 
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x;
     }
 
 
+    /**
+     * Moves the character to the right by changing its x-coordinate and updating its direction.
+     * Checks if the character is above ground after moving.
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
@@ -121,11 +135,18 @@ class Character extends MovableObject {
     }
 
 
+/**
+ * Check if the character can move to the left.
+ * @returns {boolean} - True if the character can move to the left, false otherwise. 
+ */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0;
     }
 
 
+    /**
+     * Moves the character to the left and updates its direction and checks if it's above ground.
+     */
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = true;
@@ -134,17 +155,29 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Checks if the character is above ground and plays walking sound.
+     */
     checkAboverGround() {
         if (!this.isAboveGround())
             walking_sound.play();
     }
 
 
+    /**
+     * Determines if the character can jump.
+     * @returns {boolean} True if the character can jump, false otherwise.
+     */
     canJump() {
         return this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
 
+    /**
+     * Plays the corresponding animation or routine for the character's current state.
+     * Checks if the character is dead, is hurt, is above ground, is walking or is idle and then execute the associated function.
+     * Otherwise, the idle routine is played.
+     */
     playCharacter() {
         if (this.isDead()) {
             this.deathRoutine();
@@ -162,6 +195,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Plays the character's hurt animation and sound effect and sets lastMoveCharacter to 0..
+     */
     characterIsHurtRoutine() {
         hurt_sound.play();
         this.playAnimation(this.IMAGES_HURT);
@@ -169,35 +205,56 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Plays the animation if the character jumps and sets lastMoveCharacter to 0..
+     */
     characterJumpRoutine() {
         this.playAnimation(this.IMAGES_JUMPING);
         this.lastMoveCharacter = 0;
     }
 
 
+    /**
+     * Checks whether the character is walking.
+     * @returns {boolean} true if the character is moving right or left, false otherwise.
+     */
     checkCharacterWalking() {
         return this.world.keyboard.RIGHT || this.world.keyboard.D || this.world.keyboard.LEFT || this.world.keyboard.A;
     }
 
 
+    /**
+     * Plays the walking animation and sets lastMoveCharacter to 0.
+     */
     characterWalkingRoutine() {
         this.playAnimation(this.IMAGES_WALKING);
         this.lastMoveCharacter = 0;
     }
 
 
+    /**
+     * Plays the idle animation for the character when there is no user input and character is not moving.
+     * Plays the snore sound.
+     */
     characterIdleRoutine() {
         this.playAnimation(this.IMAGES_LONG_IDLE_CHARACTER);
         snoreSound.play();
     }
 
 
+    /**
+     * Makes the character jump and plays the jump sound.
+     */
     jump() {
         this.speedY = 30;
         jumping_sound.play();
     }
 
 
+    /**
+     * Sets an interval for applying gravity to the character.
+     * The second if-query ensures that the character lands on the ground at the right y-coordinates.
+     */
     checkApplyGravity() {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -210,6 +267,12 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Plays the character's death animation and stops the game. Plays the death sound. 
+     * Sets the current time of death sound to 0. So this sound starts from the beginning next time.
+     * Stops the game music and ensures that the snoring sound is not heard after the character died. 
+     * Shows the death screen.
+     */
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);
         death_sound.currentTime = 0;
@@ -224,11 +287,20 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Checks if the character is idle based on the time elapsed since the last move.
+     * @returns {boolean} True if the character is idle, false otherwise.
+     */
     checkCharacterIdle() {
         return this.lastMoveCharacter < 50;
     }
 
 
+    /**
+     * Plays idle animation of the character.
+     * If the character has not moved for more than 50 frames, plays the long idle animation along with the snore sound effect.
+     * Otherwise, plays the regular idle animation. Plays the snore sound.
+     */
     characterIdleAnimation() {
         this.playAnimation(this.IMAGES_IDLE_CHARACTER);
         this.lastMoveCharacter++;

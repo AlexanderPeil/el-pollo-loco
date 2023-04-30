@@ -17,6 +17,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Applies gravity to the object by decreasing its vertical position (y) based on its current speedY
+     *  and updating its speedY by subtracting the object's acceleration. 
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -27,6 +31,12 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Checks if the object is above ground or not.
+     * If the object is an instance of the ThrowableObject class, 
+     * then it always returns true because throwable objects are meant to be thrown in the air.
+     * @returns {boolean} Returns true if the object is above ground or if it's an instance of ThrowableObject.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) { 
             return true;
@@ -36,6 +46,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Checks teh collision between different objects. These are the character and bottles with enemies.
+     * @param {Object} mo - The game object to check collision with.
+     * @returns {boolean} - Whether or not the two game objects are colliding. 
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -44,6 +59,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Decreases energy by 10 and sets the lastHit property to the current time.
+     * If energy goes below zero, sets it to zero.
+     */
     hit() {
         this.energy -= 10;
         if (this.energy < 0) {
@@ -54,6 +73,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Checks if the object has been hurt in the last second.
+     * @returns {boolean} Returns true if the object has been hurt in the last second.
+     */
     isHurt() {
         this.timePassed = new Date().getTime() - this.lastHit; 
         this.timePassed = this.timePassed / 1000;                  
@@ -61,16 +84,25 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Increases the player's coins by 10.
+     */
     addCoin() {
         this.coins += 10;
     }
 
 
+    /**
+     * Increases the player's bottlees by 10.
+     */
     addBottle() {
         this.bottles += 10;
     }
 
 
+    /**
+     * Reduces the energy of the end boss by 10 and updates the last hit time.
+     */
     hurtEndboss() {
         this.energy -= 10;
         if (this.energy < 0) {
@@ -81,6 +113,10 @@ class MovableObject extends DrawableObject {
     }
     
 
+    /**
+     * Checks whether the endboss is hurt or not by comparing the time passed from the last hit with a threshold of 1 second.
+     * @returns {boolean} Returns true if the endboss is hurt.
+     */
     endbossIsHurt() {
         let timePassed = new Date().getTime() - this.lastHit; 
         timePassed = timePassed / 1000;                         
@@ -88,16 +124,28 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Checks if the player is dead.
+     * @returns {boolean} True if the player's energy is 0.
+     */
     isDead() {
         return this.energy == 0;
     }
 
 
+    /**
+     * Returns true if the energy of the object is equal to 0.
+     * @returns {boolean} - Whether the energy of the object is 0 or not.
+     */
     chickenKilled() {
         return this.energy = 0;
     }
 
 
+    /**
+     * Plays an animation for different objects.
+     * @param {Array} images - An array of strings representing the image paths for the animation frames
+     */
     playAnimation(images) {
         let i = this.currenImage % images.length; 
         let path = images[i];
@@ -106,17 +154,27 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Moves the object to the right by its current speed.
+     */
     moveRight() {
         this.x += this.speed;
     }
 
 
+    /**
+     * Moves the object to the left by its current speed.
+     */
     moveLeft() {
         this.x -= this.speed;
 
     }
 
 
+    /**
+     * Animates the chicken, moving it to the left and playing a walking animation.
+     * If the chicken is dead it plays a dead animation.
+     */
     animateChicken() {
         this.move = setInterval(() => {
             this.moveLeft();
@@ -133,6 +191,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Stops the movement and walking animation of the chicken when it's dead.
+     */
     deadChicken() {
         setTimeout(() => {
             clearInterval(this.move);

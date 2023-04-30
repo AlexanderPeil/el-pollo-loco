@@ -13,6 +13,10 @@ class Statusbar extends DrawableObject {
     }
 
 
+    /**
+     * Resolves the index of the image to use for the current percentage of completion.
+     * @returns {number} The index of the image to use. 
+     */
     resolveImageIndex() {
         if (this.percentage == 50) {
             return 5;

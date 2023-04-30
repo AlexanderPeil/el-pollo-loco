@@ -295,7 +295,9 @@ function clearAllIntervals() {
 
 
 /**
- * 
+ * Adds an event listener to the window object that listens for keydown events
+ * and sets the corresponding value in the keyboard object to true if the keycode matches.
+ * @param {Object} e - The event object.
  */
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
@@ -341,7 +343,8 @@ window.addEventListener('keydown', (e) => {
 
 
 /**
- * 
+ * Event listener for keyup events that sets the corresponding property to false in the keyboard object.
+ * @param {KeyboardEvent} e - The keyboard event object
  */
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
@@ -386,7 +389,9 @@ window.addEventListener('keyup', (e) => {
 });
 
 
-
+/**
+ * Initializes mobile controls for the game.
+ */
 function mobileButtons() {
     document.getElementById("canvas").addEventListener("touchstart", (e) => {
         e.preventDefault();

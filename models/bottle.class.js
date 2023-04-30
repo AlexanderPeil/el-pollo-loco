@@ -17,6 +17,9 @@ class Bottle extends MovableObject {
     }
 
 
+    /**
+     * Animate the bottle by playing a sequence of images in a loop.
+     */
     animate() {
         setInterval(() => this.playAnimation(this.BOTTLE_IMAGES), 500);
     }

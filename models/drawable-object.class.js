@@ -8,6 +8,10 @@ class DrawableObject {
     width = 100;
 
 
+    /**
+     * Loads an image from the given path and sets it as the current image for the object.
+     * @param {*} path - The path to the image file. 
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
@@ -25,6 +29,10 @@ class DrawableObject {
     // }
 
 
+    /**
+     * Draw the image onto a canvas context at the given coordinates with the given dimensions.
+     * @param {Object} ctx - The canvas rendering context to draw on.
+     */
     draw(ctx) {
         // try {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);

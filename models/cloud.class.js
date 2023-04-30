@@ -11,6 +11,9 @@ class Cloud extends MovableObject {
     }
 
 
+    /**
+     * Animate the object's leftward movement.
+     */
     animate() {
         setInterval(() => this.moveLeft() , 1000 / 60);
     }

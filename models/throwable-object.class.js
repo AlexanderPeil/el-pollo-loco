@@ -34,6 +34,11 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Sets the initial speed and applies gravity to the bottle.
+     * Moves the bottle in the throwing direction until the bottle hits the ground or a throwable object.
+     * Clears the throw interval after 1 second.
+     */
     throw() {
         this.speedY = 25;
         this.applyGravity();
@@ -49,6 +54,9 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Animates the bottle by playing a rotation animation unless it collides with the endboss, in which case it plays a collision animation.
+     */
     animateBottle() {
         this.splash = setInterval(() => {
             if (this.y > 350 || world.collidesWithEndboss) {
@@ -61,6 +69,10 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Plays the collision animation of the bottle.
+     * It plays a splash sound effect, changes the bottle image to the splash image and stops the rotation.
+     */
     playCollisionAnimation() {     
         bottle_splash.play();
         this.playAnimation(this.IMAGES_SPLASH);
