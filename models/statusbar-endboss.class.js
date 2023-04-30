@@ -1,6 +1,6 @@
 class EndbossHealthBar extends Statusbar {    
     x = 560;
-    y = 0;
+    y = 60;
     
 
     IMAGES = [

@@ -4,7 +4,6 @@ class Endboss extends MovableObject {
     width = 250;
     y = 60;
     speed = 15;
-    hadFirstContact = false;
 
     offset = {
         top: 90,
@@ -64,47 +63,29 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 3800;
-        this.animate();
+        this.startEndbossFight();
     }
 
 
     /**
-     * The animate() method sets an interval that repeatedly calls the startEndbossFight() method. 
-     * Checks if endbossReached() is true and sets i to 0 and hadFirstContact to true.
+     * Begins the endboss fight sequence and repeatedly executes actions until the endboss is defeated or the character dies
      */
-    animate() {
-        let i = 0;
+    startEndbossFight() {
         setStoppableInterval(() => {
-            this.startEndbossFight(i);
-            i++;
-            if (this.endbossReached()) {
-                i = 0;
-                this.hadFirstContact = true;
+            if (this.distanceCharacterEndboss() >= 500 && !this.endbossIsHurt()) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else if (this.distanceCharacterEndboss() < 50 && !this.endbossIsHurt()) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            } else if (this.endbossIsHurt()) {
+                this.speed + 5;
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.isDead()) {
+                this.deathRoutine();
+            } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
+                this.playAnimation(this.IMAGES_WALKING);
+                this.moveLeft();
             }
         }, 150);
-    }
-
-
-    /**
-     * Starts the endboss fight animation based on the current frame.
-     * Cheks the dnboss frame, the distance to the character, wheter the endboss is hurt or is dead and shows the associated animation.
-     * Otherwise plays teh walking animation.
-     * @param {*} i - The current frame of the animation.
-     */
-    startEndbossFight(i) {
-        if (i < 15) {
-            this.playAnimation(this.IMAGES_ALERT);
-        } else if (this.distanceCharacterEndboss() < 400 && !this.endbossIsHurt()) {
-            this.playAnimation(this.IMAGES_ATTACK);
-        } else if (this.endbossIsHurt()) {
-            this.speed + 5;
-            this.playAnimation(this.IMAGES_HURT);
-        } else if (this.isDead()) {
-            this.deathRoutine();
-        } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
-            this.playAnimation(this.IMAGES_WALKING);
-            this.moveLeft();
-        }
     }
 
 
@@ -114,15 +95,6 @@ class Endboss extends MovableObject {
      */
     endbossFightBegins() {
         return world.character.x > world.level.endboss[0].x - 1000;
-    }
-
-
-    /**
-     * Determines if the character has reached the endboss and has not had the first contact with the boss yet.
-     * @returns {boolean} True if character reached the end boss and has not had the first contact.
-     */
-    endbossReached() {
-        return world.character.x > 3800 && !hadFirstContact;
     }
 
 

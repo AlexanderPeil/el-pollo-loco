@@ -305,8 +305,9 @@ class World {
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
-        this.addToMap(this.enbosshealthBar);
-
+        if (this.level.endboss.x - this.character.x < 500) {
+            this.addToMap(this.enbosshealthBar);
+        }
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
