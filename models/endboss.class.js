@@ -74,7 +74,7 @@ class Endboss extends MovableObject {
         setStoppableInterval(() => {
             if (this.distanceCharacterEndboss() >= 500 && !this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_ALERT);
-            } else if (this.distanceCharacterEndboss() < 50 && !this.endbossIsHurt()) {
+            } else if (this.distanceCharacterEndboss() < 40 && !this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
                 this.speed + 5;

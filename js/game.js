@@ -17,13 +17,14 @@ game_music = new Audio('./audio/game-music.mp3');
 game_music.loop = true;
 
 
-// Time must be increased after I'm finished with the game
 /**
  * Starts the game by initializing the level, hiding elements, setting up mobile buttons, 
  * showing game buttons, playing background music, and creating a new world object.
  */
 function startGame() {
+    showLoadingScreen();
     setTimeout(() => {
+        showGameContainer();
         initLevel();
         hideElements();
         mobileButtons();
@@ -34,7 +35,25 @@ function startGame() {
         game_music.volume = 0.5;
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
-    }, 500);
+    }, 2500);
+}
+
+
+/**
+ * Hides the game container and shows the loading screen.
+ */
+function showLoadingScreen() {
+    document.getElementById('game-container').classList.add('d-none');
+    document.getElementById('loading-screen').classList.remove('d-none');
+}
+
+
+/**
+ * Hides the loading screen and shows the game container.
+ */
+function showGameContainer() {
+    document.getElementById('game-container').classList.remove('d-none');
+    document.getElementById('loading-screen').classList.add('d-none');
 }
 
 
@@ -88,17 +107,17 @@ function deathScreen() {
  * Hides elements of the start screen and shows the canvas
  */
 function hideElements() {
-      document.getElementById('start-screen').classList.add('d-none');
-      document.getElementById('canvas').classList.remove('d-none');
-      document.getElementById('button-container').classList.add('d-none');
-      document.getElementById('startscreen-container').classList.add('mobile-height');
-      document.getElementById('startscreen-container').classList.remove('mobile-height');
-  }
-  
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('button-container').classList.add('d-none');
+    document.getElementById('startscreen-container').classList.add('mobile-height');
+    document.getElementById('startscreen-container').classList.remove('mobile-height');
+}
+
 
 /**
  * Restarts the game by hiding the death screen and calling the startGame function to initialize the game.
- */  
+ */
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
     death_sound.pause();
@@ -185,7 +204,6 @@ function unmuteSound() {
 function openControls() {
     document.getElementById('controls-container').classList.remove('d-none');
     document.getElementById('game-container').classList.add('d-none');
-    // document.getElementById('mobile-btns-bottom').classList.add('hide');
 }
 
 
@@ -195,7 +213,6 @@ function openControls() {
 function closeControlsContainer() {
     document.getElementById('controls-container').classList.add('d-none');
     document.getElementById('game-container').classList.remove('d-none');
-    // document.getElementById('mobile-btns-bottom').classList.remove('hide');
 }
 
 
@@ -205,8 +222,6 @@ function closeControlsContainer() {
 function openStoryContainer() {
     document.getElementById('story-container').classList.remove('d-none');
     document.getElementById('game-container').classList.add('d-none');
-    document.getElementById('mobile-btns-bottom').classList.add('d-none');
-    document.getElementById('mobile-btns-bottom').classList.add('d-none');
 }
 
 
@@ -216,8 +231,6 @@ function openStoryContainer() {
 function closeStoryContainer() {
     document.getElementById('story-container').classList.add('d-none');
     document.getElementById('game-container').classList.remove('d-none');
-    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
-    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
 }
 
 

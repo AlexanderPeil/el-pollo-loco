@@ -77,18 +77,13 @@ h1 {
 
 #game-container {
     position: relative;
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-position: center; */
 }
 
 .startscreen-container {
     position: relative;
 }
 
-#start-screen {
+.start-screen {
     width: 820px;
     height: 480px;
 }
@@ -152,7 +147,6 @@ h1 {
     width: 820px;
     height: 480px;
     border-radius: 10px;
-    /* animation: scale-in-center 225ms cubic-bezier(0.250, 0.460, 0.450, 0.940) 100ms both; */
 }
 
 .game-over-screen-img {
@@ -249,9 +243,9 @@ h1 {
 .controls-story-container-back {
     position: absolute;
     left: 10px;
-    top: 30px;
-    width: 30px;
-    height: 30px;
+    top: 40px;
+    width: 50px;
+    height: 50px;
 }
 
 .controls-story-container-back:hover {
@@ -325,6 +319,21 @@ h1 {
     letter-spacing: 5px;
 }
 
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 820px;
+    height: 480px;
+}
+
+.loading-screen  img {
+    padding-top: 15px;
+    height: 50px;
+    width: 150px;
+    object-fit: contain;
+}
+
 @keyframes grow {
     from {
         font-size: 64px;
@@ -336,28 +345,22 @@ h1 {
 
 
 /* Smartphones ---------------- */
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 915px) {
     canvas {
-        width: 100vw;
+        width: 100%;
     }
 
-    .controls-story-container {
+    .mobile-style {
         width: 100%;
         height: 100%;
     }
 
-    /* #mobile-btns-bottom {
-        opacity: 1;
-    } */
-
-    #start-screen {
-        width: 100%;
-        height: 100%;
+    .game-controls {
+        margin-bottom: 5px;
     }
 
-    .game-over-screen {
-        width: 100%;
-        height: 100%;
+    body {
+        overflow: hidden;
     }
 }
 
@@ -365,10 +368,6 @@ h1 {
     .mobile-height {
         height: 100% !important;
     }
-
-    /* #mobile-btns-bottom {
-        opacity: 1;
-    } */
 
     .keyboard-btn {
         font-size: 25px;
@@ -381,6 +380,10 @@ h1 {
 
     .control-explanation p {
         font-size: 25px;
+    }
+
+    body {
+        overflow: hidden;
     }
 }
 
