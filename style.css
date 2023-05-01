@@ -243,6 +243,7 @@ h1 {
     align-items: center;
     position: relative;
     letter-spacing: 1.2px;
+    z-index: 5;
 }
 
 .controls-story-container-back {
@@ -334,18 +335,24 @@ h1 {
 }
 
 
-@media (max-width: 820px) {
-    #start-screen {
+/* Smartphones ---------------- */
+@media only screen and (max-width: 820px) {
+    canvas {
+        width: 100vw;
+    }
+
+    .controls-story-container {
         width: 100%;
         height: 100%;
     }
 
-    #mobile-btns-bottom {
+    /* #mobile-btns-bottom {
         opacity: 1;
-    }
+    } */
 
-    #controls-container {
+    #start-screen {
         width: 100%;
+        height: 100%;
     }
 
     .game-over-screen {
@@ -354,21 +361,14 @@ h1 {
     }
 }
 
-/* Smartphones ---------------- */
-@media only screen and (max-width: 820px) {
-    canvas {
-        width: 100%;
-    }
-}
-
 @media only screen and (max-height: 520px) {
     .mobile-height {
         height: 100% !important;
     }
 
-    #mobile-btns-bottom {
+    /* #mobile-btns-bottom {
         opacity: 1;
-    }
+    } */
 
     .keyboard-btn {
         font-size: 25px;

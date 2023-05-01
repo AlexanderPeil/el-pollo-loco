@@ -185,8 +185,7 @@ function unmuteSound() {
 function openControls() {
     document.getElementById('controls-container').classList.remove('d-none');
     document.getElementById('game-container').classList.add('d-none');
-    document.getElementById('mobile-btns-bottom').classList.add('d-none');
-    document.getElementById('mobile-btns-bottom').classList.add('d-none');
+    // document.getElementById('mobile-btns-bottom').classList.add('hide');
 }
 
 
@@ -196,8 +195,7 @@ function openControls() {
 function closeControlsContainer() {
     document.getElementById('controls-container').classList.add('d-none');
     document.getElementById('game-container').classList.remove('d-none');
-    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
-    document.getElementById('mobile-btns-bottom').classList.remove('d-none');
+    // document.getElementById('mobile-btns-bottom').classList.remove('hide');
 }
 
 
