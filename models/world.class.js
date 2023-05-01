@@ -71,7 +71,7 @@ class World {
      */
 
     checkThrowObjects() {
-        if (this.keyboard.E || this.keyboard.DOWN && this.character.bottles > 0 && !this.lastThrow) {
+        if (this.checkIfBottleThrowable()) {
             this.alreadyThrow = true;
             this.lastThrow = true;
             let bottle = new ThrowableObject(this.character.x + 20, this.character.y + 100, this.character.otherDirection);
@@ -83,6 +83,15 @@ class World {
         } else {
             this.timerForThrow();
         }
+    }
+
+
+    /**
+     * Check if the bottle is throwable.
+     * @returns {boolean} Whether the bottle is throwable or not.
+     */
+    checkIfBottleThrowable() {
+        return this.keyboard.E && this.character.bottles > 0 && !this.lastThrow || this.keyboard.DOWN && this.character.bottles > 0 && !this.lastThrow;
     }
 
 
@@ -306,9 +315,7 @@ class World {
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
-        if (this.level.endboss.x - this.character.x < 500) {
-            this.addToMap(this.enbosshealthBar);
-        }
+        this.checkEnbossHealthBar();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
@@ -327,6 +334,20 @@ class World {
     }
 
 
+    /**
+     * Checks if the endboss health bar should be added to the game map.
+     */
+    checkEnbossHealthBar() {
+        if (endbossReached === true) {
+            this.addToMap(this.enbosshealthBar);
+        }
+    }
+
+
+    /**
+     * Adds the given objects to the map.
+     * @param {*} objects - An array of objects to add to the map. 
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);

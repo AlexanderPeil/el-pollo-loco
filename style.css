@@ -362,6 +362,10 @@ h1 {
     body {
         overflow: hidden;
     }
+
+    .hide {
+        opacity: 1;
+    }
 }
 
 @media only screen and (max-height: 520px) {
@@ -384,6 +388,10 @@ h1 {
 
     body {
         overflow: hidden;
+    }
+
+    .hide {
+        opacity: 1;
     }
 }
 

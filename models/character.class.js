@@ -278,6 +278,7 @@ class Character extends MovableObject {
         death_sound.currentTime = 0;
         death_sound.play();
         game_music.pause();
+        boss_music.pause();
         stopGame();
 
         setTimeout(() => {

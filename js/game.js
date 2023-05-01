@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
+let endbossReached = false;
+
 walking_sound = new Audio('./audio/running.mp3');
 jumping_sound = new Audio('./audio/jump.mp3');
 hurt_sound = new Audio('./audio/hurt.mp3');
@@ -13,13 +15,17 @@ coinSound = new Audio('./audio/coin.mp3');
 deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
 snoreSound = new Audio('./audio/snore.mp3');
+
+boss_music = new Audio('./audio/boss-music.mp3');
+boss_music.loop = true;
+
 game_music = new Audio('./audio/game-music.mp3');
 game_music.loop = true;
 
 
 /**
  * Starts the game by initializing the level, hiding elements, setting up mobile buttons, 
- * showing game buttons, playing background music, and creating a new world object.
+ * showing game buttons and creating a new world object.
  */
 function startGame() {
     showLoadingScreen();
@@ -29,13 +35,22 @@ function startGame() {
         hideElements();
         mobileButtons();
         showButtons();
-        snoreSound.volume = 1;
-        game_music.currentTime = 0;
-        game_music.play();
-        game_music.volume = 0.5;
+        soundSettings();
         canvas = document.getElementById('canvas');
         world = new World(canvas, keyboard);
     }, 2500);
+}
+
+
+/**
+ * Set the sound settings for the game
+ */
+function soundSettings() {
+    snoreSound.volume = 1;
+    game_music.currentTime = 0;
+    game_music.play();
+    game_music.volume = 0.5;
+    boss_music.currentTime = 0;
 }
 
 
@@ -161,6 +176,7 @@ function mainMenu() {
  */
 function muteSound() {
     document.getElementById('unmute-sound').classList.remove('d-none');
+    document.getElementById('mute-sound').classList.add('d-none');
     walking_sound.volume = 0;
     jumping_sound.volume = 0;
     hurt_sound.volume = 0;
@@ -173,6 +189,7 @@ function muteSound() {
     throwSound.volume = 0;
     snoreSound.volume = 0;
     game_music.volume = 0;
+    boss_music.volume = 0;
 }
 
 
@@ -195,6 +212,7 @@ function unmuteSound() {
     throwSound.volume = 1;
     snoreSound.volume = 1;
     game_music.volume = 0.5;
+    boss_music.volume = 1;
 }
 
 

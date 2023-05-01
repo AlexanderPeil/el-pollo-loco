@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 60;
-    speed = 15;
+    speed = 25;
 
     offset = {
         top: 90,
@@ -77,13 +77,12 @@ class Endboss extends MovableObject {
             } else if (this.distanceCharacterEndboss() < 40 && !this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
-                this.speed + 5;
                 this.playAnimation(this.IMAGES_HURT);
+                deadChicken.play();
             } else if (this.isDead()) {
                 this.deathRoutine();
             } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft();
+                this.endbossIsWalking();
             }
         }, 150);
     }
@@ -108,12 +107,25 @@ class Endboss extends MovableObject {
 
 
     /**
+     * Plays the animation for the endboss walking, moves the endboss to the left, 
+     * sets the "endbossReached" variable to true and starts the boss music while pausing the game music.
+     */
+    endbossIsWalking() {
+        this.playAnimation(this.IMAGES_WALKING);
+        this.moveLeft();
+        endbossReached = true;
+        boss_music.play();
+        game_music.pause();
+    }
+
+
+    /**
      * Plays the death animation, pauses the game music, plays the win sound effect, and stops the game.
      * After a delay, the gameWon() function is called, and the snore sound effect and win sound effect are muted.
      */
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);
-        game_music.pause();
+        boss_music.pause();
         win_sound.play();
         setTimeout(() => {
             clearAllIntervals();
