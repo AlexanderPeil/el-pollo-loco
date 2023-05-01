@@ -78,7 +78,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                deadChicken.play();
+                hit_boss.play();
             } else if (this.isDead()) {
                 this.deathRoutine();
             } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
@@ -127,6 +127,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         boss_music.pause();
         win_sound.play();
+        endbosIsDead === true;
         setTimeout(() => {
             clearAllIntervals();
             gameWon();

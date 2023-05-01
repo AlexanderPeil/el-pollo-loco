@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 let endbossReached = false;
+let endbosIsDead = false;
 
 walking_sound = new Audio('./audio/running.mp3');
 jumping_sound = new Audio('./audio/jump.mp3');
@@ -16,6 +17,7 @@ deadChicken = new Audio('./audio/chicken.mp3');
 throwSound = new Audio('./audio/throw.mp3');
 snoreSound = new Audio('./audio/snore.mp3');
 
+hit_boss = new Audio('./audio/hit-boss.mp3');
 boss_music = new Audio('./audio/boss-music.mp3');
 boss_music.loop = true;
 

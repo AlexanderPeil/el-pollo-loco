@@ -185,7 +185,7 @@ class Character extends MovableObject {
             this.characterIsHurtRoutine();
         } else if (this.isAboveGround()) {
             this.characterJumpRoutine();
-        } else if (this.checkCharacterWalking()) {
+        } else if (this.checkCharacterWalking() && !endbosIsDead) {
             this.characterWalkingRoutine();
         } else if (this.checkCharacterIdle()) {
             this.characterIdleAnimation();
