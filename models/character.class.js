@@ -159,7 +159,7 @@ class Character extends MovableObject {
      * Checks if the character is above ground and plays walking sound.
      */
     checkAboverGround() {
-        if (!this.isAboveGround())
+        if (!this.isAboveGround() && !this.isHurt())
             walking_sound.play();
     }
 

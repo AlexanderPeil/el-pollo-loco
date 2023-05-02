@@ -27,7 +27,7 @@ let muteButton = false;
 function soundSettings() {
     snoreSound.volume = 1;
     checkgameMusicMuted();
-    checkMuteButton();
+    // checkMuteButton();
 
     boss_music.currentTime = 0;
 }
@@ -48,11 +48,11 @@ function checkgameMusicMuted() {
 
 
 
-function checkMuteButton() {
-    if (!muteButton) {
+// function checkMuteButton() {
+//     if (!muteButton) {
         
-    }
-}
+//     }
+// }
 
 
 /**
@@ -63,6 +63,8 @@ function pauseGameSounds() {
     death_sound.currentTime = 0;
     game_music.pause();
     game_music.currentTime = 0;
+    win_sound.pause();
+    win_sound.currentTime = 0;
 }
 
 

@@ -136,6 +136,5 @@ class Endboss extends MovableObject {
         }, 500);
 
         setTimeout(() => snoreSound.volume = 0, 1000);
-        setTimeout(() => win_sound.volume = 0, 3000);
     }
 }

@@ -122,13 +122,15 @@ function gameWon() {
     document.getElementById('unmute-sound').classList.add('d-none');
     document.getElementById('fullscreen-btn').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
-    document.getElementById('controls').classList.add('d-none');
     document.getElementById('controls-ingame').classList.add('d-none');
     document.getElementById('exit-fullscreen').classList.add('d-none');
+
+    endbossReached = false;
 
     setTimeout(() => {
         document.getElementById('game-over-screen-img').classList.add('d-none');
         document.getElementById('game-won-container').classList.remove('d-none');
+        endbosIsDead = false;
     }, 2000);
 }
 
@@ -141,10 +143,13 @@ function mainMenu() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('start-screen').classList.remove('d-none');
     document.getElementById('button-container').classList.remove('d-none');
+    document.getElementById('restart-container').classList.add('d-none');
+    document.getElementById('game-won-container').classList.add('d-none');
+    document.getElementById('game-over-screen-img').classList.add('d-none');
+    endbossReached = false;
     exitFullscreen();
     pauseGameSounds();
     hideButtons();
-    document.getElementById('restart-container').classList.add('d-none');
 }
 
 
