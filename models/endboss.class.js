@@ -8,8 +8,8 @@ class Endboss extends MovableObject {
     offset = {
         top: 90,
         bottom: 40,
-        left: 40,
-        right: 40
+        left: 35,
+        right: 35
     }
 
 
@@ -77,7 +77,7 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     endbossReached = true;
                 }, 1000);
-            } else if (this.distanceCharacterEndboss() < 40 && !this.endbossIsHurt()) {
+            } else if (this.distanceCharacterEndboss() < 28 && !this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

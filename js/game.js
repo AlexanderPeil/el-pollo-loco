@@ -66,9 +66,7 @@ function stopGame() {
  * Shows game buttons by removing the 'd-none' class from their respective HTML elements.
  */
 function showButtons() {
-    document.getElementById('mute-sound').classList.remove('d-none');
-    document.getElementById('fullscreen-btn').classList.remove('d-none');
-    document.getElementById('controls-ingame').classList.remove('d-none');
+    document.getElementById('button-container-ingame').classList.remove('d-none');
 }
 
 
@@ -78,14 +76,11 @@ function showButtons() {
 function deathScreen() {
     setTimeout(() => {
         document.getElementById('canvas').classList.add('d-none');
-        document.getElementById('mute-sound').classList.add('d-none');
-        document.getElementById('unmute-sound').classList.add('d-none');
-        document.getElementById('fullscreen-btn').classList.add('d-none');
+        document.getElementById('button-container-ingame').classList.add('d-none');
         document.getElementById('mobile-btns-bottom').classList.add('d-none');
         document.getElementById('restart-container').classList.remove('d-none');
-        document.getElementById('controls-ingame').classList.add('d-none');
-        document.getElementById('exit-fullscreen').classList.add('d-none');
     }, 500);
+    endbossReached = false;
 }
 
 
@@ -109,6 +104,7 @@ function restartGame() {
     death_sound.pause();
     clearAllIntervals();
     startGame();
+    endbosIsDead = false;
 }
 
 
@@ -118,12 +114,8 @@ function restartGame() {
 function gameWon() {
     document.getElementById('game-over-screen-img').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
-    document.getElementById('mute-sound').classList.add('d-none');
-    document.getElementById('unmute-sound').classList.add('d-none');
-    document.getElementById('fullscreen-btn').classList.add('d-none');
+    document.getElementById('button-container-ingame').classList.add('d-none');
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
-    document.getElementById('controls-ingame').classList.add('d-none');
-    document.getElementById('exit-fullscreen').classList.add('d-none');
 
     endbossReached = false;
 
@@ -157,9 +149,7 @@ function mainMenu() {
  * Hide all ingame buttons.
  */
 function hideButtons() {
-    document.getElementById('mute-sound').classList.add('d-none');
-    document.getElementById('fullscreen-btn').classList.add('d-none');
-    document.getElementById('controls-ingame').classList.add('d-none');
+    document.getElementById('button-container-ingame').classList.add('d-none');
 }
 
 
