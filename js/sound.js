@@ -18,8 +18,6 @@ let game_music_muted = false;
 game_music = new Audio('./audio/game-music.mp3');
 game_music.loop = true;
 
-let muteButton = false;
-
 
 /**
  * Set the sound settings for the game
@@ -27,7 +25,6 @@ let muteButton = false;
 function soundSettings() {
     snoreSound.volume = 1;
     checkgameMusicMuted();
-    // checkMuteButton();
 
     boss_music.currentTime = 0;
 }
@@ -45,14 +42,6 @@ function checkgameMusicMuted() {
         game_music.volume = 0;
     }
 }
-
-
-
-// function checkMuteButton() {
-//     if (!muteButton) {
-        
-//     }
-// }
 
 
 /**

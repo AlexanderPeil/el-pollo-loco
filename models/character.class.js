@@ -119,7 +119,7 @@ class Character extends MovableObject {
      * @returns {boolean} true if the character can move right, false otherwise. 
      */
     canMoveRight() {
-        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.D && this.x < this.world.level.level_end_x;
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isDead() || this.world.keyboard.D && this.x < this.world.level.level_end_x && !this.isDead();
     }
 
 
@@ -140,7 +140,7 @@ class Character extends MovableObject {
  * @returns {boolean} - True if the character can move to the left, false otherwise. 
  */
     canMoveLeft() {
-        return this.world.keyboard.LEFT && this.x > 0 || this.world.keyboard.A && this.x > 0;
+        return this.world.keyboard.LEFT && this.x > 0 && !this.isDead() || this.world.keyboard.A && this.x > 0 && !this.isDead();
     }
 
 
@@ -275,17 +275,15 @@ class Character extends MovableObject {
      */
     deathRoutine() {
         this.playAnimation(this.IMAGES_DEAD);
-        death_sound.currentTime = 0;
         death_sound.play();
         game_music.pause();
         boss_music.pause();
         walking_sound.pause();
-        stopGame();
 
         setTimeout(() => {
             deathScreen();
             snoreSound.volume = 0;
-        }, 1000);
+        }, 3000);
     }
 
 

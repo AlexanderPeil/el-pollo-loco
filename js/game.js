@@ -102,9 +102,11 @@ function hideElements() {
 function restartGame() {
     document.getElementById('restart-container').classList.add('d-none');
     death_sound.pause();
+    endbosIsDead = false;
+    death_sound.currentTime = 0;
+    
     clearAllIntervals();
     startGame();
-    endbosIsDead = false;
 }
 
 
@@ -138,7 +140,10 @@ function mainMenu() {
     document.getElementById('restart-container').classList.add('d-none');
     document.getElementById('game-won-container').classList.add('d-none');
     document.getElementById('game-over-screen-img').classList.add('d-none');
+    
+    death_sound.currentTime = 0;
     endbossReached = false;
+
     exitFullscreen();
     pauseGameSounds();
     hideButtons();
