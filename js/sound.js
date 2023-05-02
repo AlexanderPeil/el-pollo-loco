@@ -62,8 +62,7 @@ function pauseGameSounds() {
  * Also shows the "unmute sound" button.
  */
 function muteSound() {
-    document.getElementById('unmute-sound').classList.remove('d-none');
-    document.getElementById('mute-sound').classList.add('d-none');
+    showUnmuteButton();
     walking_sound.volume = 0;
     jumping_sound.volume = 0;
     hurt_sound.volume = 0;
@@ -83,12 +82,20 @@ function muteSound() {
 
 
 /**
+ * Displays the unmute sound button and hides the mute sound button.
+ */
+function showUnmuteButton() {
+    document.getElementById('unmute-sound').classList.remove('d-none');
+    document.getElementById('mute-sound').classList.add('d-none');
+}
+
+
+/**
  * The unmuteSound() function in the code is used to unmute the game sounds.
  * Also it shows the "mute" button.
  */
 function unmuteSound() {
-    document.getElementById('unmute-sound').classList.add('d-none');
-    document.getElementById('mute-sound').classList.remove('d-none');
+    showMuteButton();
     walking_sound.volume = 1;
     jumping_sound.volume = 1;
     hurt_sound.volume = 1;
@@ -104,6 +111,15 @@ function unmuteSound() {
     boss_music.volume = 1;
     hit_boss.volume = 1;
     muteButton = false;
+}
+
+
+/**
+ * Displays the mute sound button and hides the unmute sound button.
+ */
+function showMuteButton() {
+    document.getElementById('unmute-sound').classList.add('d-none');
+    document.getElementById('mute-sound').classList.remove('d-none');
 }
 
 

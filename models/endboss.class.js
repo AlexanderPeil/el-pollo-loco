@@ -72,22 +72,56 @@ class Endboss extends MovableObject {
      */
     startEndbossFight() {
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() <= 700 && !this.endbossIsHurt() && !endbossReached) {
-                this.playAnimation(this.IMAGES_ALERT);
-                setTimeout(() => {
-                    endbossReached = true;
-                }, 1000);
-            } else if (this.distanceCharacterEndboss() < 28 && !this.endbossIsHurt()) {
+            if (this.checkEndbossAlert()) {
+                this.endbossAlert();
+            } else if (this.checkEndbossAttack()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                hit_boss.play();
+                this.endbossIsHurtRoutine();
             } else if (this.isDead()) {
                 this.deathRoutine();
-            } else if (endbossReached  === true) {
-                    this.endbossIsWalking();
+            } else if (endbossReached === true) {
+                this.endbossIsWalking();
             }
         }, 150);
+    }
+
+    
+    /**
+     * Checks if the character is close enough to the endboss to alert the endboss.
+     * @returns {boolean} True if the character is close enough to the endboss.
+     */
+    checkEndbossAlert() {
+        return this.distanceCharacterEndboss() <= 700 && !this.endbossIsHurt() && !endbossReached;
+    }
+
+
+    /**
+     * Plays the endboss alert animation and sets endbossReached to true after 1 second.
+     */
+    endbossAlert() {
+        this.playAnimation(this.IMAGES_ALERT);
+        setTimeout(() => {
+            endbossReached = true;
+        }, 1000);
+    }
+
+
+    /**
+     * Checks if the character is within attack range of the endboss and if the endboss is not hurt.
+     * @returns {boolean} True if the character is within attack range.
+     */
+    checkEndbossAttack() {
+        return this.distanceCharacterEndboss() < 28 && !this.endbossIsHurt();
+    }
+
+
+    /**
+     * Plays the hurt animation for the endboss and plays the hit sound effect.
+     */
+    endbossIsHurtRoutine() {
+        this.playAnimation(this.IMAGES_HURT);
+        hit_boss.play();
     }
 
 

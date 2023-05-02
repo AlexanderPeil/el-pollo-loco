@@ -104,7 +104,7 @@ function restartGame() {
     death_sound.pause();
     endbosIsDead = false;
     death_sound.currentTime = 0;
-    
+
     clearAllIntervals();
     startGame();
 }
@@ -120,7 +120,15 @@ function gameWon() {
     document.getElementById('mobile-btns-bottom').classList.add('d-none');
 
     endbossReached = false;
+    showGameWonContainer();
+}
 
+
+/**
+ * Shows the "game won" container after a delay of 2 seconds.
+ * Hides the "game over" image and sets the global variable "endbosIsDead" to false.
+ */
+function showGameWonContainer() {
     setTimeout(() => {
         document.getElementById('game-over-screen-img').classList.add('d-none');
         document.getElementById('game-won-container').classList.remove('d-none');
@@ -134,19 +142,27 @@ function gameWon() {
  */
 function mainMenu() {
     clearAllIntervals();
-    document.getElementById('canvas').classList.add('d-none');
-    document.getElementById('start-screen').classList.remove('d-none');
-    document.getElementById('button-container').classList.remove('d-none');
-    document.getElementById('restart-container').classList.add('d-none');
-    document.getElementById('game-won-container').classList.add('d-none');
-    document.getElementById('game-over-screen-img').classList.add('d-none');
-    
+    showMainMenu();
+
     death_sound.currentTime = 0;
     endbossReached = false;
 
     exitFullscreen();
     pauseGameSounds();
     hideButtons();
+}
+
+
+/**
+ * Shows the main menu by adding/removing appropriate CSS classes to DOM elements.
+ */
+function showMainMenu() {
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('start-screen').classList.remove('d-none');
+    document.getElementById('button-container').classList.remove('d-none');
+    document.getElementById('restart-container').classList.add('d-none');
+    document.getElementById('game-won-container').classList.add('d-none');
+    document.getElementById('game-over-screen-img').classList.add('d-none');
 }
 
 
@@ -262,15 +278,15 @@ function fullscreenStyle() {
  */
 function exitFullscreen() {
     if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
     }
     removeFullscreenStyle();
-  }
-  
+}
+
 
 
 /**
