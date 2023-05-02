@@ -18,6 +18,8 @@ let game_music_muted = false;
 game_music = new Audio('./audio/game-music.mp3');
 game_music.loop = true;
 
+let muteButton = false;
+
 
 /**
  * Set the sound settings for the game
@@ -25,6 +27,7 @@ game_music.loop = true;
 function soundSettings() {
     snoreSound.volume = 1;
     checkgameMusicMuted();
+    checkMuteButton();
 
     boss_music.currentTime = 0;
 }
@@ -40,6 +43,14 @@ function checkgameMusicMuted() {
         game_music.volume = 0.5;
     } else {
         game_music.volume = 0;
+    }
+}
+
+
+
+function checkMuteButton() {
+    if (!muteButton) {
+        
     }
 }
 
@@ -76,6 +87,7 @@ function muteSound() {
     muteGameMusic();
     boss_music.volume = 0;
     hit_boss.volume = 0;
+    muteButton = true;
 }
 
 
@@ -100,6 +112,7 @@ function unmuteSound() {
     unmuteGameMusic();
     boss_music.volume = 1;
     hit_boss.volume = 1;
+    muteButton = false;
 }
 
 
@@ -109,6 +122,8 @@ function unmuteSound() {
 function muteGameMusic() {
     game_music.pause();
     game_music_muted = true;
+
+    muteButton = true;
 }
 
 
