@@ -192,6 +192,7 @@ function muteSound() {
     snoreSound.volume = 0;
     game_music.volume = 0;
     boss_music.volume = 0;
+    hit_boss.volume = 0;
 }
 
 
@@ -215,6 +216,7 @@ function unmuteSound() {
     snoreSound.volume = 1;
     game_music.volume = 0.5;
     boss_music.volume = 1;
+    hit_boss.volume = 1;
 }
 
 
@@ -238,6 +240,9 @@ function closeControlsContainer() {
 }
 
 
+/**
+ * Shows the in-game controls and hides the canvas element and back buttons.
+ */
 function openIngameControls() {
     document.getElementById('controls-container').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
@@ -246,6 +251,9 @@ function openIngameControls() {
 }
 
 
+/**
+ * Hides the in-game controls container and shows the game canvas and main controls button.
+ */
 function closeControlsContainerIngame() {
     document.getElementById('controls-container').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
