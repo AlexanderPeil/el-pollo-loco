@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusbarHealth = new StatusbarHealth();
+    statusbarIcon = new StatusbarIcon();
     throwableObjects = [];
     statusbarBottle = new Bottlebar();
     statusbarCoin = new Coinbar();
@@ -310,6 +311,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
 
         this.addToMap(this.statusbarHealth);
@@ -321,7 +323,6 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
@@ -341,6 +342,7 @@ class World {
     checkEnbossHealthBar() {
         if (endbossReached === true) {
             this.addToMap(this.enbosshealthBar);
+            this.addToMap(this.statusbarIcon);
         }
     }
 
