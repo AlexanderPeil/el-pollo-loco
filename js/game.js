@@ -223,7 +223,8 @@ function unmuteSound() {
  */
 function openControls() {
     document.getElementById('controls-container').classList.remove('d-none');
-    document.getElementById('game-container').classList.add('d-none');
+    document.getElementById('startscreen-container').classList.add('d-none');
+    document.getElementById('button-container').classList.add('d-none');
 }
 
 
@@ -232,7 +233,24 @@ function openControls() {
  */
 function closeControlsContainer() {
     document.getElementById('controls-container').classList.add('d-none');
-    document.getElementById('game-container').classList.remove('d-none');
+    document.getElementById('startscreen-container').classList.remove('d-none');
+    document.getElementById('button-container').classList.remove('d-none');
+}
+
+
+function openIngameControls() {
+    document.getElementById('controls-container').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('controls-container-back').classList.add('d-none');
+    document.getElementById('controls-container-ingame-back').classList.remove('d-none');
+}
+
+
+function closeControlsContainerIngame() {
+    document.getElementById('controls-container').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('controls-container-back').classList.remove('d-none');
+    document.getElementById('controls-container-ingame-back').classList.add('d-none');
 }
 
 
@@ -283,11 +301,13 @@ function enterFullscreen(element) {
  * Applies CSS styling to elements when the game enters fullscreen mode.
  */
 function fullscreenStyle() {
-    document.getElementById('restart-container').classList.add('canvasFullscreen');
-    document.getElementById('game-won-container').classList.add('canvasFullscreen');
-    document.getElementById('canvas').classList.add('canvasFullscreen');
+    document.getElementById('restart-container').classList.add('fullscreen');
+    document.getElementById('game-won-container').classList.add('fullscreen');
+    document.getElementById('canvas').classList.add('fullscreen');
     document.getElementById('fullscreen-btn').classList.add('d-none');
     document.getElementById('exit-fullscreen').classList.remove('d-none');
+    document.getElementById('game-won-container').classList.add('fullscreen');
+    document.getElementById('controls-container').classList.add('fullscreen');
 }
 
 
@@ -309,11 +329,12 @@ function exitFullscreen() {
  * Restores the fullscreen button and hides the exit fullscreen button.
  */
 function removeFullscreenStyle() {
-    document.getElementById('restart-container').classList.remove('canvasFullscreen');
-    document.getElementById('game-won-container').classList.remove('canvasFullscreen');
-    document.getElementById('canvas').classList.remove('canvasFullscreen');
+    document.getElementById('restart-container').classList.remove('fullscreen');
+    document.getElementById('game-won-container').classList.remove('fullscreen');
+    document.getElementById('canvas').classList.remove('fullscreen');
     document.getElementById('fullscreen-btn').classList.remove('d-none');
     document.getElementById('exit-fullscreen').classList.add('d-none');
+    document.getElementById('controls-container').classList.remove('fullscreen');
 }
 
 

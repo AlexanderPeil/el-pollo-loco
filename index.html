@@ -58,7 +58,7 @@
             onclick="fullscreen()">
         <img id="exit-fullscreen" class="fullscreen-btn ingame-btns d-none" src="./img/exit-fullscreen.png" alt="#"
             onclick="exitFullscreen(); removeFullscreenStyle()">
-        <img id="controls-ingame" class="controls ingame-btns d-none" src="img/controls.png" onclick="openControls()">
+        <img id="controls-ingame" class="controls ingame-btns d-none" src="img/controls.png" onclick="openIngameControls()">
         <div id="mobile-btns-bottom" class="hide d-none">
             <div class="mobile-btns-flex">
                 <div class="mobile-btns">
@@ -109,28 +109,30 @@
                 <button class="buttons" onclick="mainMenu()">MAIN MENU</button>
             </div>
         </div>
-    </div>
-
-    <div id="controls-container" class="controls-story-container mobile-height mobile-style d-none">
-        <img id="controls-container-back" class="controls-story-container-back" src="img/go-back.png"
-            onclick="closeControlsContainer()">
-        <h2 class="game-controls">Game Controls</h2>
-        <div class="control-explanation-container">
-            <div class="control-icons">
-                <div class="keyboard-btn"><img src="img/arrow-left.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspA</div>
-                <div class="keyboard-btn"><img src="img/arrow-right.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspD</div>
-                <div class="keyboard-btn"><img src="img/arrow-up.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp<img
-                        class="keyboard-btn" src="img/space-btn.png"></div>
-                <div class="keyboard-btn"><img src="img/arrow-down.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspE</div>
-            </div>
-            <div class="control-explanation">
-                <p class="pepe-order">Move Left</p>
-                <p class="pepe-order">Move Right</p>
-                <p class="pepe-order">Jump</p>
-                <p class="pepe-order">Throw</p>
+        <div id="controls-container" class="controls-story-container mobile-height mobile-style d-none">
+            <img id="controls-container-back" class="controls-story-container-back" src="img/go-back.png"
+                onclick="closeControlsContainer()">
+                <img id="controls-container-ingame-back" class="controls-story-container-back d-none" src="img/go-back.png"
+                onclick="closeControlsContainerIngame()">
+            <h2 class="game-controls">Game Controls</h2>
+            <div class="control-explanation-container">
+                <div class="control-icons">
+                    <div class="keyboard-btn"><img src="img/arrow-left.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspA</div>
+                    <div class="keyboard-btn"><img src="img/arrow-right.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspD</div>
+                    <div class="keyboard-btn"><img src="img/arrow-up.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp<img
+                            class="keyboard-btn" src="img/space-btn.png"></div>
+                    <div class="keyboard-btn"><img src="img/arrow-down.png">&nbsp&nbsp&nbsp/&nbsp&nbsp&nbspE</div>
+                </div>
+                <div class="control-explanation">
+                    <p class="pepe-order">Move Left</p>
+                    <p class="pepe-order">Move Right</p>
+                    <p class="pepe-order">Jump</p>
+                    <p class="pepe-order">Throw</p>
+                </div>
             </div>
         </div>
     </div>
+
     <div id="story-container" class="controls-story-container mobile-height mobile-style d-none">
         <img id="story-container-back" class="controls-story-container-back" src="img/go-back.png"
             onclick="closeStoryContainer()">
@@ -148,7 +150,6 @@
     </div>
 
     </div>
-
 </body>
 
 </html>
