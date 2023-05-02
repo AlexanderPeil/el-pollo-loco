@@ -316,6 +316,7 @@ class World {
         this.addToMap(this.statusbarBottle);
         this.addToMap(this.statusbarCoin);
         this.checkEnbossHealthBar();
+        
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
