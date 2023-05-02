@@ -72,8 +72,11 @@ class Endboss extends MovableObject {
      */
     startEndbossFight() {
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() >= 500 && !this.endbossIsHurt()) {
+            if (this.distanceCharacterEndboss() <= 700 && !this.endbossIsHurt() && !endbossReached) {
                 this.playAnimation(this.IMAGES_ALERT);
+                setTimeout(() => {
+                    endbossReached = true;
+                }, 1000);
             } else if (this.distanceCharacterEndboss() < 40 && !this.endbossIsHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.endbossIsHurt()) {
@@ -81,8 +84,8 @@ class Endboss extends MovableObject {
                 hit_boss.play();
             } else if (this.isDead()) {
                 this.deathRoutine();
-            } else if (!this.isDead() && !this.endbossIsHurt() && this.endbossFightBegins()) {
-                this.endbossIsWalking();
+            } else if (endbossReached  === true) {
+                    this.endbossIsWalking();
             }
         }, 150);
     }
@@ -113,7 +116,6 @@ class Endboss extends MovableObject {
     endbossIsWalking() {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
-        endbossReached = true;
         boss_music.play();
         game_music.pause();
     }
