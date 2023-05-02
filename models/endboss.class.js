@@ -163,11 +163,12 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         boss_music.pause();
         win_sound.play();
-        endbosIsDead === true;
+        endbosIsDead = true;
+
         setTimeout(() => {
             clearAllIntervals();
             gameWon();
-        }, 500);
+        }, 1500);
 
         setTimeout(() => snoreSound.volume = 0, 1000);
     }

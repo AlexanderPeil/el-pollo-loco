@@ -119,8 +119,9 @@ class Character extends MovableObject {
      * @returns {boolean} true if the character can move right, false otherwise. 
      */
     canMoveRight() {
-        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isDead() || this.world.keyboard.D && this.x < this.world.level.level_end_x && !this.isDead();
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isDead() && !endbosIsDead || this.world.keyboard.D && this.x < this.world.level.level_end_x && !this.isDead() && !endbosIsDead;
     }
+
 
 
     /**
@@ -135,12 +136,12 @@ class Character extends MovableObject {
     }
 
 
-/**
- * Check if the character can move to the left.
- * @returns {boolean} - True if the character can move to the left, false otherwise. 
- */
+    /**
+     * Check if the character can move to the left.
+     * @returns {boolean} - True if the character can move to the left, false otherwise. 
+     */
     canMoveLeft() {
-        return this.world.keyboard.LEFT && this.x > 0 && !this.isDead() || this.world.keyboard.A && this.x > 0 && !this.isDead();
+        return this.world.keyboard.LEFT && this.x > 0 && !this.isDead() && !endbosIsDead || this.world.keyboard.A && this.x > 0 && !this.isDead() && !endbosIsDead;
     }
 
 
